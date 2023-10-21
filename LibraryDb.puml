@@ -1,0 +1,113 @@
+@startuml
+' hide the spot
+' hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Konyvek" as Books {
+  *KonyvID : int <<PK>>
+  --
+  Cim : string
+  ISBN : string
+  KiadasiEv : int
+  KiadoID : int <<FK>>
+  SzerzoID : int <<FK>>
+  KategoriaID : int <<FK>>
+}
+
+entity "Kiadok" as Publishers {
+  *KiadoID : int <<PK>>
+  --
+  Nev : string
+}
+
+entity "Szerzok" as Authors {
+  *SzerzoID : int <<PK>>
+  --
+  Nev : string
+}
+
+entity "Kategoriak" as Categories {
+  *KategoriaID : int <<PK>>
+  --
+  Nev : string
+}
+
+entity "Konyvtarosok" as Librarians {
+  *KonyvtarosID : int <<PK>>
+  --
+  Nev : string
+  Felhasznalonev : string
+  Jelszo : string
+  Beosztas : string
+  EmailCim : string
+}
+
+entity "Olvasok" as Readers {
+  *OlvasoID : int <<PK>>
+  --
+  Nev : string
+  Felhasznalonev : string
+  Jelszo : string
+  TagsagTipusa : string
+  TagsagKezdete : date
+  EmailCim : string
+}
+
+entity "Kolcsonzesek" as Loans {
+  *KolcsonzesID : int <<PK>>
+  --
+  KonyvID : int <<FK>>
+  OlvasoID : int <<FK>>
+  KolcsonzesDatum : date
+  VisszaadasDatum : date
+  KesedelmiDij : decimal
+}
+
+entity "KonyvtarHelyszinek" as LibraryLocations {
+  *HelyszinID : int <<PK>>
+  --
+  HelyszinNeve : string
+  Leiras : string
+  Kapacitas : int
+}
+
+entity "KesedelmiDijak" as LateFees {
+  *DijID : int <<PK>>
+  --
+  DijOsszege : decimal
+  KesedelmiIdotartam : int
+}
+
+entity "KonyvtariBeszerzesek" as LibraryAcquisitions {
+  *BeszerzesID : int <<PK>>
+  --
+  KonyvID : int <<FK>>
+  BeszerzesDatum : date
+  Ar : decimal
+  Forras : string
+}
+
+entity "KonyvtariErtekelesek" as LibraryReviews {
+  *ErtekelesID : int <<PK>>
+  --
+  KonyvID : int <<FK>>
+  OlvasoID : int <<FK>>
+  ErtekelesDatum : date
+  ErtekelesSzovege : string
+  ErtekelesPontszama : int
+}
+
+Books }o--o{ LibraryLocations
+Books }o--o{ Publishers
+Books }o--o{ Authors
+Books }o--o{ Categories
+Librarians }o--o{ LibraryLocations
+Loans }o--o{ Books
+Loans }o--o{ Readers
+LateFees }o--o{ Loans
+LibraryAcquisitions }o--o{ Books
+LibraryReviews }o--o{ Books
+LibraryReviews }o--o{ Readers
+@enduml
