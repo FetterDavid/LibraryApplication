@@ -6,23 +6,23 @@ namespace LibraryApplication.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BookController : ControllerBase
+    public class MemberController : ControllerBase
     {
         private readonly LibraryContext _libraryContext;
 
-        public BookController(LibraryContext libraryContext)
+        public MemberController(LibraryContext libraryContext)
         {
             this._libraryContext = libraryContext;
         }
         /// <summary>
-        /// Creates a new book.
+        /// Creates a new member.
         /// </summary>
-        /// <param name="book">The book object to create.</param>
+        /// <param name="member">The member object to create.</param>
         /// <returns>A response indicating the success of the create operation.</returns>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Book book)
+        public async Task<IActionResult> Post([FromBody] Member member)
         {
-            _libraryContext.Books.Add(book);
+            _libraryContext.Members.Add(member);
             await _libraryContext.SaveChangesAsync();
             return this.Ok();
         }
@@ -31,10 +31,10 @@ namespace LibraryApplication.Api.Controllers
         /// </summary>
         /// <returns>A list of all books.</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> Get()
+        public async Task<ActionResult<IEnumerable<Member>>> Get()
         {
-            var books = await this._libraryContext.Books.ToListAsync();
-            return this.Ok(books);
+            var members = await this._libraryContext.Members.ToListAsync();
+            return this.Ok(members);
         }
         /// <summary>
         /// Retrieves 1 book by ID
@@ -43,12 +43,12 @@ namespace LibraryApplication.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetById(int id)
         {
-            var person = await _libraryContext.Books.FindAsync(id);
-            if (person is null)
+            var member = await _libraryContext.Members.FindAsync(id);
+            if (member is null)
             {
                 return NotFound();
             }
-            return Ok(person);
+            return Ok(member);
         }
     }
 }

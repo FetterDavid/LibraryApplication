@@ -11,8 +11,8 @@ namespace LibraryApplication.Api
             : base(options)
         {
         }
-
+        
         public virtual DbSet<Book> Books { get; set; }
-
+        public virtual DbSet<Member> Members { get; set; }
     }
 }
