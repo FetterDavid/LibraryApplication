@@ -14,7 +14,6 @@ namespace LibraryApplication.Api.Controllers
         {
             this._libraryContext = libraryContext;
         }
-
         /// <summary>
         /// Creates a new book.
         /// </summary>
@@ -23,12 +22,10 @@ namespace LibraryApplication.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Book book)
         {
-            this._libraryContext.Books.Add(book);
-            await this._libraryContext.SaveChangesAsync();
-
+            _libraryContext.Books.Add(book);
+            await _libraryContext.SaveChangesAsync();
             return this.Ok();
         }
-
         /// <summary>
         /// Retrieves all books.
         /// </summary>
@@ -39,16 +36,19 @@ namespace LibraryApplication.Api.Controllers
             var books = await this._libraryContext.Books.ToListAsync();
             return this.Ok(books);
         }
-
         /// <summary>
         /// Retrieves 1 book by ID
         /// </summary>
         /// <returns>A list of all books.</returns>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> Get(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Book>> GetById(int id)
         {
-            var books = await this._libraryContext.Books.ToListAsync();
-            return this.Ok(books);
+            var person = await _libraryContext.Books.FindAsync(id);
+            if (person is null)
+            {
+                return NotFound();
+            }
+            return Ok(person);
         }
 
     }
