@@ -41,7 +41,7 @@ namespace LibraryApplication.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Member member)
         {
-            _libraryContext.Members.Add(member);
+            _libraryContext.Set<Member>().Add(member);
             await _libraryContext.SaveChangesAsync();
             return this.Ok();
         }
