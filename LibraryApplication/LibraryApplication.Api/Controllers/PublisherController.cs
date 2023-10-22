@@ -6,67 +6,67 @@ namespace LibraryApplication.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BookController : ControllerBase
+    public class PublisherController : ControllerBase
     {
         private readonly LibraryContext _libraryContext;
 
-        public BookController(LibraryContext libraryContext)
+        public PublisherController(LibraryContext libraryContext)
         {
             this._libraryContext = libraryContext;
         }
         /// <summary>
-        /// Delete a book by id.
+        /// Delete a publisher by id.
         /// </summary>
         /// <returns>A response indicating the success of the delete operation.</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var existingBook = await _libraryContext.Books.FindAsync(id);
+            var existingPublisher = await _libraryContext.Publishers.FindAsync(id);
 
-            if (existingBook is null)
+            if (existingPublisher is null)
             {
                 return NotFound();
             }
 
-            _libraryContext.Books.Remove(existingBook);
+            _libraryContext.Publishers.Remove(existingPublisher);
             await _libraryContext.SaveChangesAsync();
 
             return NoContent();
         }
         /// <summary>
-        /// Creates a new book.
+        /// Creates a new Publisher.
         /// </summary>
-        /// <param name="book">The book object to create.</param>
+        /// <param name="publisher">The Publisher object to create.</param>
         /// <returns>A response indicating the success of the create operation.</returns>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Book book)
+        public async Task<IActionResult> Post([FromBody] Publisher publisher)
         {
-            _libraryContext.Books.Add(book);
+            _libraryContext.Publishers.Add(publisher);
             await _libraryContext.SaveChangesAsync();
             return this.Ok();
         }
         /// <summary>
-        /// Retrieves all books.
+        /// Retrieves all publishers.
         /// </summary>
-        /// <returns>A list of all books.</returns>
+        /// <returns>A list of all publishers.</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> Get()
+        public async Task<ActionResult<IEnumerable<Publisher>>> Get()
         {
-            var books = await this._libraryContext.Books.ToListAsync();
-            return this.Ok(books);
+            var publishers = await this._libraryContext.Publishers.ToListAsync();
+            return this.Ok(publishers);
         }
         /// <summary>
-        /// Retrieves 1 book by ID
+        /// Retrieves 1 publisher by ID
         /// </summary>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetById(int id)
+        public async Task<ActionResult<Publisher>> GetById(int id)
         {
-            var book = await _libraryContext.Books.FindAsync(id);
-            if (book is null)
+            var publisher = await _libraryContext.Publishers.FindAsync(id);
+            if (publisher is null)
             {
                 return NotFound();
             }
-            return Ok(book);
+            return Ok(publisher);
         }
     }
 }
