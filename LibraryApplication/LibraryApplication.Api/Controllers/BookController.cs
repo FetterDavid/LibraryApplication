@@ -15,6 +15,25 @@ namespace LibraryApplication.Api.Controllers
             this._libraryContext = libraryContext;
         }
         /// <summary>
+        /// Delete a book by id.
+        /// </summary>
+        /// <returns>A response indicating the success of the delete operation.</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var existingBook = await _libraryContext.Books.FindAsync(id);
+
+            if (existingBook is null)
+            {
+                return NotFound();
+            }
+
+            _libraryContext.Books.Remove(existingBook);
+            await _libraryContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+        /// <summary>
         /// Creates a new book.
         /// </summary>
         /// <param name="book">The book object to create.</param>

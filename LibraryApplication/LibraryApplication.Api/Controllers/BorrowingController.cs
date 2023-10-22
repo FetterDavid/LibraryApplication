@@ -15,6 +15,25 @@ namespace LibraryApplication.Api.Controllers
             this._libraryContext = libraryContext;
         }
         /// <summary>
+        /// Delete a borrowing by id.
+        /// </summary>
+        /// <returns>A response indicating the success of the delete operation.</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var existingBorowing = await _libraryContext.Borrowings.FindAsync(id);
+
+            if (existingBorowing is null)
+            {
+                return NotFound();
+            }
+
+            _libraryContext.Borrowings.Remove(existingBorowing);
+            await _libraryContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+        /// <summary>
         /// Creates a new borrowing.
         /// </summary>
         /// <param name="borrowing">The borrowing object to create.</param>
