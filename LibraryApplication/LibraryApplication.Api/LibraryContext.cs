@@ -14,5 +14,6 @@ namespace LibraryApplication.Api
         
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<Borrowing> Borrowings { get; set; }
     }
 }

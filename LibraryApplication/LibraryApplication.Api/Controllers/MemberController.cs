@@ -37,11 +37,10 @@ namespace LibraryApplication.Api.Controllers
             return this.Ok(members);
         }
         /// <summary>
-        /// Retrieves 1 book by ID
+        /// Retrieves 1 member by ID
         /// </summary>
-        /// <returns>A list of all books.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetById(int id)
+        public async Task<ActionResult<Member>> GetById(int id)
         {
             var member = await _libraryContext.Members.FindAsync(id);
             if (member is null)

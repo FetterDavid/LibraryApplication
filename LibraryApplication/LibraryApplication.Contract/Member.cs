@@ -12,7 +12,7 @@ namespace LibraryApplication.Contract
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int ReaderNumber { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
