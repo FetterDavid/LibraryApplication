@@ -11,7 +11,7 @@ namespace LibraryApplication.Api
             : base(options)
         {
         }
-        
+
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Borrowing> Borrowings { get; set; }
@@ -20,5 +20,6 @@ namespace LibraryApplication.Api
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Librarian> Librarians { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
+        public virtual DbSet<LateFee> LateFees { get; set; }
     }
 }
