@@ -21,5 +21,6 @@ namespace LibraryApplication.Api
         public virtual DbSet<Librarian> Librarians { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<LateFee> LateFees { get; set; }
+        public virtual DbSet<BookAcquisition> BookAcquisitions { get; set; }
     }
 }
