@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryApplication.Contract
+namespace LibraryApplication.Contract.Models
 {
-    public class Author
+    public class Publisher
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

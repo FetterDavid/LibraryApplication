@@ -1,4 +1,4 @@
-﻿using LibraryApplication.Contract;
+﻿using LibraryApplication.Contract.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

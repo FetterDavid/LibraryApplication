@@ -1,5 +1,5 @@
 ﻿using LibraryApplication.Api.Controllers;
-using LibraryApplication.Contract;
+using LibraryApplication.Contract.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryApplication.Api.Controllers

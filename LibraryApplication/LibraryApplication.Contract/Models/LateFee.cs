@@ -6,18 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryApplication.Contract
+namespace LibraryApplication.Contract.Models
 {
-    public class Member
+    public class LateFee
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ReaderNumber { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public double FeeAmount { get; set; }
         [Required]
-        public string Email { get; set; }
-        public string MembershipType { get; set; }
-        public int MembershipStartYear { get; set; }
+        public int MinLateDays { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using Microsoft.EntityFrameworkCore;
-using LibraryApplication.Contract;
+using LibraryApplication.Contract.Models;
 
 namespace LibraryApplication.Api
 {

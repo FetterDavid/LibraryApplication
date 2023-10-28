@@ -6,21 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryApplication.Contract
+namespace LibraryApplication.Contract.Models
 {
-    public class Rating
+    public class Member
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [Required]
         public int ReaderNumber { get; set; }
         [Required]
-        public int InventoryNumber { get; set; }
+        public string Name { get; set; }
         [Required]
-        public int Point { get; set; }
-        public string Comment { get; set; }
-        [Required]
-        public DateTime RatingDate { get; set; }
+        public string Email { get; set; }
+        public string MembershipType { get; set; }
+        public int MembershipStartYear { get; set; }
     }
 }
