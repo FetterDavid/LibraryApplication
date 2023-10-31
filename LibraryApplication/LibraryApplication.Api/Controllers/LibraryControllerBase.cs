@@ -36,6 +36,21 @@ namespace LibraryApplication.Api.Controllers
             return Ok();
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] TEntity entityToUpdate)
+        {
+            var entity = await _libraryContext.Set<TEntity>().FindAsync(id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            _libraryContext.Entry(entity).CurrentValues.SetValues(entityToUpdate);
+            await _libraryContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TEntity>>> Get()
         {
