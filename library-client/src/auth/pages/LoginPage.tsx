@@ -1,6 +1,7 @@
 import { Button, Card, CardBody, CardFooter, Input, Spinner } from "@material-tailwind/react";
 import { useCallback, useMemo, useState } from "react";
 import { login } from "@/auth/api";
+import { displayErrorNotification } from "@/notifications";
 
 export default function LoginPage() {
     const [ username, setUsername ] = useState("");
@@ -16,8 +17,7 @@ export default function LoginPage() {
 
         setLoading(true);
         login(username, password)
-            .then(console.log)
-            .catch(console.error)
+            .catch(displayErrorNotification)
             .finally(() => setLoading(false));
     }, [ canLogin, username, password ]);
 
