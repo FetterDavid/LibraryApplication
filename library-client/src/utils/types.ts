@@ -6,6 +6,8 @@ export interface Identifiable {
 
 export type Unidentifiable<T extends Identifiable> = Omit<T, "id">
 
+export type Unsubscribe = () => void
+
 export interface ComponentClassNameProps<ElemType extends HTMLElement = HTMLDivElement> {
     className?: HTMLAttributes<ElemType>["className"];
 }
