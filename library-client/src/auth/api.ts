@@ -37,11 +37,12 @@ function refreshAuthState(data: AuthUser | undefined) {
 }
 
 export async function login(username: string, password: string) {
-    const userData = await apiRequest<AuthUser>("/Librarian/login", "GET", {
+    const params = new URLSearchParams({
         UserName: username,
         Password: password
     });
 
+    const userData = await apiRequest<AuthUser>(`/Librarian/login?${ params }`, "GET");
     refreshAuthState(userData);
 }
 
