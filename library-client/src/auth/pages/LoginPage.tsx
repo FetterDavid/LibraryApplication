@@ -2,8 +2,26 @@ import { Button, Card, CardBody, CardFooter, Input, Spinner } from "@material-ta
 import { useCallback, useMemo, useState } from "react";
 import { login } from "@/auth/api";
 import { displayErrorNotification } from "@/notifications";
+import { useAuthUser } from "@/auth/hooks";
+import { LoadingView, LoadingViewContent, LoadingViewError } from "@/utils/components/loading";
+import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
+    const [ user, loadingUser ] = useAuthUser();
+
+    return (
+        <LoadingView condition={ loadingUser }>
+            <LoadingViewError condition={ !!user }>
+                <Navigate to="/" />
+            </LoadingViewError>
+            <LoadingViewContent>
+                <LoginPageContent />
+            </LoadingViewContent>
+        </LoadingView>
+    );
+}
+
+function LoginPageContent() {
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ loading, setLoading ] = useState(false);

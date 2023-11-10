@@ -10,20 +10,19 @@ interface AuthStateListener {
 
 const authListeners: AuthStateListener[] = [];
 
-let authUserData: AuthUser | undefined = undefined
-;(() => {
-    const lsData = window.localStorage.getItem(LS_KEY_AUTH_USER_DATA);
-    refreshAuthState(!!lsData ? JSON.parse(lsData) : undefined);
-})();
-
 export function onAuthentication(listener: AuthStateListener): Unsubscribe {
     authListeners.push(listener);
-    listener(structuredClone(authUserData));
+    listener(structuredClone(getAuthUserData()));
     return () => offAuthentication(listener);
 }
 
 function offAuthentication(listener: AuthStateListener) {
     delete authListeners[authListeners.indexOf(listener)];
+}
+
+function getAuthUserData(): AuthUser | undefined {
+    const data = window.localStorage.getItem(LS_KEY_AUTH_USER_DATA);
+    return !!data ? JSON.parse(data) : undefined;
 }
 
 function refreshAuthState(data: AuthUser | undefined) {
