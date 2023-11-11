@@ -7,10 +7,6 @@
         @apply bg-blue-gray-50 overflow-x-hidden;
     }
 
-    h1, h2, h3, h4, h5 {
-        @apply font-display;
-    }
-
     #notifications-container {
         @apply fixed z-50 right-8 bottom-8 flex flex-col items-end justify-end gap-4
     }

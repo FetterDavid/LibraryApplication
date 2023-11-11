@@ -1,6 +1,7 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import { AuthProtectedView } from "@/auth/components";
 import { LoginPage } from "@/auth/pages";
+import { MainLayout } from "@/utils/components";
 
 function App() {
     return (
@@ -9,7 +10,9 @@ function App() {
                 <AuthProtectedView>
                     <Outlet />
                 </AuthProtectedView>
-            }></Route>
+            }>
+                <Route index element={ <MainLayout /> }></Route>
+            </Route>
             <Route path="/login" element={ <LoginPage /> } />
         </Routes>
     );
