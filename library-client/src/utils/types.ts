@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from "react";
 
 export interface Identifiable {
-    id: string;
+    id: number;
 }
 
 export type Unidentifiable<T extends Identifiable> = Omit<T, "id">

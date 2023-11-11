@@ -84,6 +84,10 @@ function MainSidebar() {
             icon: "inventory",
             title: "Beszerzések",
             redirect: "acquisitions"
+        }, {
+            icon: "category",
+            title: "Kategorizálás",
+            redirect: "categorisation"
         } ];
     }, []);
 
@@ -120,7 +124,7 @@ function NavButton(props: {
               className={ `px-6 border-l-4
              ${ isActive ? "border-deep-purple-400" : "border-transparent" }` }>
             <ListItem className={ `${ isActive ? "bg-deep-purple-50" : "bg-transparent" }
-            gap-3` }>
+            gap-3 focus:bg-deep-purple-50` }>
                 <ListItemPrefix className="mr-0">
                     <MaterialSymbol name={ props.icon } className="text-gray-900" />
                 </ListItemPrefix>

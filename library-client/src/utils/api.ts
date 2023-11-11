@@ -11,11 +11,19 @@ export async function apiRequest<ResponseType = void>(
 
     const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
     const url = `https://${ apiOrigin }/${ normalizedPath }`;
-    const response = await fetch(url, { method, body });
+    const response = await fetch(url, {
+        method, body: !!body ? JSON.stringify(body) : undefined,
+        headers: { "Content-Type": "application/json" }
+    });
 
     if (!response.ok) {
         throw new Error(await response.text());
     }
 
-    return await response.json() as ResponseType;
+    if (response.headers.has("Content-Type") &&
+        response.headers.get("Content-Type")!.includes("application/json")) {
+        return await response.json() as ResponseType;
+    }
+
+    return undefined as ResponseType;
 }
