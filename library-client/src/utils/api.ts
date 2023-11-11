@@ -1,6 +1,6 @@
 type ApiRequestMethod = "GET" | "POST" | "PUT" | "DELETE"
 
-export async function apiRequest<ResponseType extends object>(
+export async function apiRequest<ResponseType = void>(
     path: string, method: ApiRequestMethod, body?: any
 ): Promise<ResponseType> {
     const apiOrigin = process.env["REACT_APP_API_ORIGIN"];

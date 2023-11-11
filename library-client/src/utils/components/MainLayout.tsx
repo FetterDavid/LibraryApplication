@@ -12,7 +12,8 @@ import {
 import { MaterialSymbol } from "@/utils/components/index";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { logout } from "@/auth/api";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { LibraryRouteProvider } from "@/library/components/LibraryRouteProvider";
 
 export default function MainLayout() {
     return (
@@ -21,7 +22,7 @@ export default function MainLayout() {
             <MainNavbar />
             <MainSidebar />
             <div className="col-start-2 col-span-1 row-start-2 row-span-1 w-full">
-                <Outlet />
+                <LibraryRouteProvider />
             </div>
         </div>
     );
