@@ -98,7 +98,7 @@ function MainSidebar() {
                     Navigáció
                 </Typography>
                 <hr />
-                <List>
+                <List className="px-0 py-4">
                     { links.map((value, index) => (
                         <NavButton { ...value } key={ index } />
                     )) }
