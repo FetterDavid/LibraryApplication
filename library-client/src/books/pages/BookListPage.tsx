@@ -23,11 +23,12 @@ import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Book, BookEditData } from "@/books/types";
 import { BookEditLayout } from "@/books/components";
-import { createBook, editBook } from "@/books/api";
+import { createBook, deleteBook, editBook } from "@/books/api";
 import { Unidentifiable } from "@/utils/types";
 import { displayErrorNotification, displayInfoNotification } from "@/notifications";
 import { useBookDetails } from "@/books/hooks";
 import { MaterialSymbol } from "@/utils/components";
+import { DestructiveIconButton } from "@/utils/components/inputs";
 
 const PARAM_KEY_MODAL = "modal";
 const PARAM_VALUE_MODAL_NEW_BOOK = "new-book";
@@ -81,6 +82,12 @@ function BooksDataTable() {
         });
     }, [ setSearchParams ]);
 
+    const attemptDelete = useCallback((id: number) => {
+        deleteBook(id)
+            .then(() => window.location.reload())
+            .catch(displayErrorNotification);
+    }, []);
+
     return (
         <DataTable dataList={ books } excludedProperties={ [ "id" ] }>
             <DataTableDataColumn list={ books } forKey="author"
@@ -117,14 +124,14 @@ function BooksDataTable() {
                                          { value.name }
                                      </Typography>
                                  ) } />
-            <DataTableActionColumn list={ books } element={ entry => (
+            <DataTableActionColumn list={ books } element={ ({ id }) => (
                 <div className="flex flex-row gap-2">
-                    <IconButton variant="text" onClick={ () => openModal(entry.id) }>
+                    <IconButton variant="text" onClick={ () => openModal(id) }>
                         <MaterialSymbol name="edit" />
                     </IconButton>
-                    <IconButton variant="text" color="red">
+                    <DestructiveIconButton onClick={ () => attemptDelete(id) }>
                         <MaterialSymbol name="delete" />
-                    </IconButton>
+                    </DestructiveIconButton>
                 </div>
             ) } />
         </DataTable>

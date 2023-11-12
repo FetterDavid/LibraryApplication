@@ -1,7 +1,6 @@
 import {
     Card,
     CardBody,
-    IconButton,
     List,
     ListItem,
     ListItemPrefix,
@@ -10,10 +9,11 @@ import {
     Typography
 } from "@material-tailwind/react";
 import { MaterialSymbol } from "@/utils/components/index";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { logout } from "@/auth/api";
 import { Link, useLocation } from "react-router-dom";
 import { LibraryRouteProvider } from "@/library/components/LibraryRouteProvider";
+import { DestructiveIconButton } from "@/utils/components/inputs";
 
 export default function MainLayout() {
     return (
@@ -29,22 +29,6 @@ export default function MainLayout() {
 }
 
 function MainNavbar() {
-    const [ isConfirming, setIsConfirming ] = useState(false);
-
-    useEffect(() => {
-        if (!isConfirming) return;
-
-        const id = setTimeout(() => setIsConfirming(false), 4000);
-        return () => clearTimeout(id);
-    }, [ isConfirming ]);
-
-    const attemptLogout = useCallback(() => {
-        setIsConfirming(prevState => {
-            if (prevState) logout();
-            return !prevState;
-        });
-    }, []);
-
     return (
         <Navbar className="sticky top-0 z-10 h-max max-w-full px-4 py-2
         lg:px-8 lg:py-4 flex flex-row justify-between items-center
@@ -53,10 +37,9 @@ function MainNavbar() {
                 Library Application
             </Typography>
             <Tooltip content="Kijelentkezés" placement="left">
-                <IconButton color="red" variant={ isConfirming ? "gradient" : "text" }
-                            onClick={ attemptLogout }>
+                <DestructiveIconButton onClick={ logout }>
                     <MaterialSymbol name="logout" />
-                </IconButton>
+                </DestructiveIconButton>
             </Tooltip>
         </Navbar>
     );

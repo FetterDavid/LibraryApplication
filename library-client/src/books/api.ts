@@ -13,3 +13,7 @@ export async function editBook(id: number, data: Unidentifiable<Book>) {
     delete (temp as any)["inventoryData"];
     return apiRequest(`/Book/${ id }`, "PUT", temp);
 }
+
+export async function deleteBook(id: number) {
+    return apiRequest(`/Book/${ id }`, "DELETE");
+}
