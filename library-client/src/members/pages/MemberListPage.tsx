@@ -27,6 +27,7 @@ import { MemberEditData } from "@/members/types";
 import { MemberEditLayout } from "@/members/components/MemberEditLayout";
 import { createMember, deleteMember, editMember } from "@/members/api";
 import { useMemberDetails } from "@/members/hooks";
+import { DestructiveIconButton } from "@/utils/components/inputs";
 
 const PARAM_KEY_MODAL = "modal";
 const PARAM_VALUE_MODAL_MEMBER = "member";
@@ -111,9 +112,9 @@ function MembersDataTable() {
                     <IconButton variant="text" onClick={ () => openModal(id) }>
                         <MaterialSymbol name="edit" />
                     </IconButton>
-                    <IconButton variant="text" color="red" onClick={ () => attemptDelete(id) }>
+                    <DestructiveIconButton onClick={ () => attemptDelete(id) }>
                         <MaterialSymbol name="delete" />
-                    </IconButton>
+                    </DestructiveIconButton>
                 </div>
             ) } />
         </DataTable>

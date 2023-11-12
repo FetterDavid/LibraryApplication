@@ -28,11 +28,16 @@ import {
 } from "@/utils/components/data-table";
 import { useSearchParams } from "react-router-dom";
 import { CategorisationType } from "@/categorisation/types";
-import { createCategorizationObject, editCategorisationObject } from "@/categorisation/api";
+import {
+    createCategorizationObject,
+    deleteCategorisationObject,
+    editCategorisationObject
+} from "@/categorisation/api";
 import { displayErrorNotification, displayInfoNotification } from "@/notifications";
 import { MaterialSymbol } from "@/utils/components";
 import { useCategorisationObjectDetails } from "@/categorisation/hooks";
 import { categorisationTypeName } from "@/categorisation";
+import { DestructiveIconButton } from "@/utils/components/inputs";
 
 const PARAM_KEY_TAB = "tab";
 const PARAM_VALUE_TAB_CATEGORIES = "categories";
@@ -130,6 +135,12 @@ function Content<T extends Identifiable & { name: string }>(props: {
         });
     }, [ props.type, setSearchParams ]);
 
+    const attemptDelete = useCallback((id: number) => {
+        deleteCategorisationObject(props.type, id)
+            .then(() => window.location.reload())
+            .catch(displayErrorNotification);
+    }, [ props.type ]);
+
     return (
         <Fragment>
             <CardBody>
@@ -141,14 +152,14 @@ function Content<T extends Identifiable & { name: string }>(props: {
                                                  { value }
                                              </Typography>
                                          ) } />
-                    <DataTableActionColumn list={ props.list } element={ entry => (
+                    <DataTableActionColumn list={ props.list } element={ ({ id }) => (
                         <div className="flex flex-row gap-2">
-                            <IconButton variant="text" onClick={ () => openModal(entry.id) }>
+                            <IconButton variant="text" onClick={ () => openModal(id) }>
                                 <MaterialSymbol name="edit" />
                             </IconButton>
-                            <IconButton variant="text" color="red">
+                            <DestructiveIconButton onClick={ () => attemptDelete(id) }>
                                 <MaterialSymbol name="delete" />
-                            </IconButton>
+                            </DestructiveIconButton>
                         </div>
                     ) } />
                 </DataTable>

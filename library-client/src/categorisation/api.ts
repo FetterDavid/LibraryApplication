@@ -10,3 +10,8 @@ export async function editCategorisationObject(type: CategorisationType, id: num
     const path = `${ categorisationTypeToEndpoint(type) }/${ id }`;
     return apiRequest(path, "PUT", { id, name });
 }
+
+export async function deleteCategorisationObject(type: CategorisationType, id: number) {
+    const path = `${ categorisationTypeToEndpoint(type) }/${ id }`;
+    return apiRequest(path, "DELETE");
+}
