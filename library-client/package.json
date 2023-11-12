@@ -23,7 +23,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "preserve": "REACT_APP_API_ORIGIN=localhost:7098 npm run build",
+    "preserve": "npm run build",
     "serve": "serve --single ./build"
   },
   "eslintConfig": {
