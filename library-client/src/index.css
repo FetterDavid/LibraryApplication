@@ -8,7 +8,7 @@
     }
 
     #notifications-container {
-        @apply fixed z-50 right-8 bottom-8 flex flex-col items-end justify-end gap-4
+        @apply fixed z-[10000] right-8 bottom-8 flex flex-col items-end justify-end gap-4
     }
 }
 

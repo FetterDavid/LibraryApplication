@@ -36,17 +36,10 @@ const PARAM_KEY_ID = "id";
 
 export default function BookListPage() {
     const [ , setSearchParams ] = useSearchParams();
-    const library = useLibraryFromContext();
 
-    const openModal = useCallback((edit: boolean, id?: number) => {
+    const openModal = useCallback(() => {
         setSearchParams(prevState => {
-            prevState.set(PARAM_KEY_MODAL,
-                edit ? PARAM_VALUE_MODAL_EDIT_BOOK : PARAM_VALUE_MODAL_NEW_BOOK);
-
-            if (!!id) {
-                prevState.set(PARAM_KEY_ID, String(id));
-            }
-
+            prevState.set(PARAM_KEY_MODAL, PARAM_VALUE_MODAL_NEW_BOOK);
             return prevState;
         });
     }, [ setSearchParams ]);
@@ -61,57 +54,11 @@ export default function BookListPage() {
                 </CardHeader>
                 <hr />
                 <CardBody>
-                    <DataTable dataList={ library.books } excludedProperties={ [ "id" ] }>
-                        <DataTableDataColumn list={ library.books } forKey="author"
-                                             header="Író"
-                                             element={ value => (
-                                                 <Typography variant="small">
-                                                     { value.name }
-                                                 </Typography>
-                                             ) } />
-                        <DataTableDataColumn list={ library.books } forKey="title"
-                                             header="Cím"
-                                             element={ value => (
-                                                 <Typography variant="small" className="font-bold">
-                                                     { value }
-                                                 </Typography>
-                                             ) } />
-                        <DataTableDataColumn list={ library.books } forKey="category"
-                                             header="Kategória"
-                                             element={ value => (
-                                                 <Typography variant="small">
-                                                     { value.name }
-                                                 </Typography>
-                                             ) } />
-                        <DataTableDataColumn list={ library.books } forKey="publicationYear"
-                                             header="Kiadás éve"
-                                             element={ value => (
-                                                 <Chip value={ value } variant="ghost"
-                                                       className="w-min" color="deep-purple" />
-                                             ) } />
-                        <DataTableDataColumn list={ library.books } forKey="publisher"
-                                             header="Kiadó"
-                                             element={ value => (
-                                                 <Typography variant="small">
-                                                     { value.name }
-                                                 </Typography>
-                                             ) } />
-                        <DataTableActionColumn list={ library.books } element={ entry => (
-                            <div className="flex flex-row gap-2">
-                                <IconButton variant="text"
-                                            onClick={ () => openModal(true, entry.id) }>
-                                    <MaterialSymbol name="edit" />
-                                </IconButton>
-                                <IconButton variant="text" color="red">
-                                    <MaterialSymbol name="delete" />
-                                </IconButton>
-                            </div>
-                        ) } />
-                    </DataTable>
+                    <BooksDataTable />
                 </CardBody>
                 <hr />
                 <CardFooter>
-                    <Button variant="filled" onClick={ () => openModal(false) }>
+                    <Button variant="filled" onClick={ openModal }>
                         Új könyv felvétele
                     </Button>
                 </CardFooter>
@@ -119,6 +66,68 @@ export default function BookListPage() {
             <NewBookModal />
             <EditBookModal />
         </Fragment>
+    );
+}
+
+function BooksDataTable() {
+    const { books } = useLibraryFromContext();
+    const [ , setSearchParams ] = useSearchParams();
+
+    const openModal = useCallback((id: number) => {
+        setSearchParams(prevState => {
+            prevState.set(PARAM_KEY_MODAL, PARAM_VALUE_MODAL_EDIT_BOOK);
+            prevState.set(PARAM_KEY_ID, String(id));
+            return prevState;
+        });
+    }, [ setSearchParams ]);
+
+    return (
+        <DataTable dataList={ books } excludedProperties={ [ "id" ] }>
+            <DataTableDataColumn list={ books } forKey="author"
+                                 header="Író"
+                                 element={ value => (
+                                     <Typography variant="small">
+                                         { value.name }
+                                     </Typography>
+                                 ) } />
+            <DataTableDataColumn list={ books } forKey="title"
+                                 header="Cím"
+                                 element={ value => (
+                                     <Typography variant="small" className="font-bold">
+                                         { value }
+                                     </Typography>
+                                 ) } />
+            <DataTableDataColumn list={ books } forKey="category"
+                                 header="Kategória"
+                                 element={ value => (
+                                     <Typography variant="small">
+                                         { value.name }
+                                     </Typography>
+                                 ) } />
+            <DataTableDataColumn list={ books } forKey="publicationYear"
+                                 header="Kiadás éve"
+                                 element={ value => (
+                                     <Chip value={ value } variant="ghost"
+                                           className="w-min" color="deep-purple" />
+                                 ) } />
+            <DataTableDataColumn list={ books } forKey="publisher"
+                                 header="Kiadó"
+                                 element={ value => (
+                                     <Typography variant="small">
+                                         { value.name }
+                                     </Typography>
+                                 ) } />
+            <DataTableActionColumn list={ books } element={ entry => (
+                <div className="flex flex-row gap-2">
+                    <IconButton variant="text" onClick={ () => openModal(entry.id) }>
+                        <MaterialSymbol name="edit" />
+                    </IconButton>
+                    <IconButton variant="text" color="red">
+                        <MaterialSymbol name="delete" />
+                    </IconButton>
+                </div>
+            ) } />
+        </DataTable>
     );
 }
 

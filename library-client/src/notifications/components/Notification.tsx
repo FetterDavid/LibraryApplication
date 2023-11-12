@@ -60,7 +60,8 @@ export default function Notification(props: NotificationProps) {
             <CardBody className="flex flex-row items-start justify-start gap-6">
                 <MaterialSymbol name={ props.error ? "warning" : "info" }
                                 className={ props.error ? "text-red-200" : "text-blue-200" } />
-                <Typography className="font-bold row-span-full" variant="small">
+                <Typography className="font-bold row-span-full overflow-scroll max-h-96"
+                            variant="small">
                     { String(props.text) }
                 </Typography>
             </CardBody>
