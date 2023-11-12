@@ -1,12 +1,14 @@
 import { HTMLAttributes, ReactNode } from "react";
 
 export interface Identifiable {
-    id: string;
+    id: number;
 }
 
 export type Unidentifiable<T extends Identifiable> = Omit<T, "id">
 
 export type Unsubscribe = () => void
+
+export type Override<T, R> = Omit<T, keyof R> & R;
 
 export interface ComponentClassNameProps<ElemType extends HTMLElement = HTMLDivElement> {
     className?: HTMLAttributes<ElemType>["className"];

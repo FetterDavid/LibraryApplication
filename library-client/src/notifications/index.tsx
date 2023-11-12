@@ -13,7 +13,7 @@ export function displayErrorNotification(text: string) {
 
 function displayNotification(text: string, error: boolean) {
     const rootContainer = document.createElement("div");
-    rootContainer.id = crypto.randomUUID();
+    rootContainer.id = `${ Math.round(Math.random() * 0xfff) }:${ (Date.now()).toString(16) }`;
     container.appendChild(rootContainer);
 
     const root = createRoot(rootContainer);
