@@ -1,8 +1,7 @@
-import { Identifiable } from "@/utils/types";
+import { Identifiable, Override, Unidentifiable } from "@/utils/types";
 import { CategorisationObject } from "@/categorisation/types";
 
 export interface Book extends Identifiable {
-    inventoryNumber: number;
     title: string;
     publicationYear: number;
     publisherId: number;
@@ -16,11 +15,8 @@ export interface BookWithFullInfo extends Book {
     publisher: CategorisationObject;
 }
 
-export interface BookEditData {
-    categoryId: number | undefined;
+export interface BookEditData extends Override<Unidentifiable<Book>, {
+    categoryId: number | undefined
     authorId: number | undefined;
     publisherId: number | undefined;
-    inventoryNumber: number;
-    title: string;
-    publicationYear: number;
-}
+}> {}

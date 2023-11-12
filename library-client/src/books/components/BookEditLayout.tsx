@@ -27,9 +27,6 @@ export default function BookEditLayout(props: DataEditLayoutComponentProps<BookE
             <NumberInput value={ props.data.publicationYear } onValue={ value => {
                 props.onData({ ...props.data, publicationYear: value });
             } } label="Kiadás éve" max={ new Date().getFullYear() } />
-            <NumberInput value={ props.data.inventoryNumber } onValue={ value => {
-                props.onData({ ...props.data, inventoryNumber: value });
-            } } label="Leltári szám" />
         </div>
     );
 }

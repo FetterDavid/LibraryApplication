@@ -20,6 +20,7 @@ export function useBookList(): [ BookWithFullInfo[], boolean ] {
                 setList(books.map((b, i) => {
                     return {
                         ...b,
+                        id: (b as any)["inventoryNumber"],
                         category: categorisationData[i][0],
                         author: categorisationData[i][1],
                         publisher: categorisationData[i][2]
@@ -52,6 +53,7 @@ export function useBookDetails(id: number): [ BookWithFullInfo | undefined, bool
                 }));
                 setData({
                     ...book,
+                    id: (book as any)["inventoryNumber"],
                     category: categorisationData[0],
                     author: categorisationData[1],
                     publisher: categorisationData[2]

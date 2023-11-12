@@ -38,9 +38,10 @@ export default function BookListPage() {
     const [ , setSearchParams ] = useSearchParams();
     const library = useLibraryFromContext();
 
-    const openModal = useCallback((id?: number) => {
+    const openModal = useCallback((edit: boolean, id?: number) => {
         setSearchParams(prevState => {
-            prevState.set(PARAM_KEY_MODAL, PARAM_VALUE_MODAL_EDIT_BOOK);
+            prevState.set(PARAM_KEY_MODAL,
+                edit ? PARAM_VALUE_MODAL_EDIT_BOOK : PARAM_VALUE_MODAL_NEW_BOOK);
 
             if (!!id) {
                 prevState.set(PARAM_KEY_ID, String(id));
@@ -98,7 +99,7 @@ export default function BookListPage() {
                         <DataTableActionColumn list={ library.books } element={ entry => (
                             <div className="flex flex-row gap-2">
                                 <IconButton variant="text"
-                                            onClick={ () => openModal(entry.id) }>
+                                            onClick={ () => openModal(true, entry.id) }>
                                     <MaterialSymbol name="edit" />
                                 </IconButton>
                                 <IconButton variant="text" color="red">
@@ -110,7 +111,7 @@ export default function BookListPage() {
                 </CardBody>
                 <hr />
                 <CardFooter>
-                    <Button variant="filled" onClick={ () => openModal() }>
+                    <Button variant="filled" onClick={ () => openModal(false) }>
                         Új könyv felvétele
                     </Button>
                 </CardFooter>
@@ -238,8 +239,8 @@ function EditBookModal() {
     }, [ book ]);
 
     useEffect(() => {
-        if (!searchParams.has(PARAM_KEY_ID)) setOpen(false);
-    }, [ searchParams, setOpen ]);
+        if (open && !searchParams.has(PARAM_KEY_ID)) setOpen(false);
+    }, [ open, searchParams, setOpen ]);
 
     return (
         <Dialog open={ open } handler={ setOpen }>
@@ -261,7 +262,7 @@ function EditBookModal() {
                 </Button>
                 <Button variant="filled" disabled={ loading || loadingBook || !book }
                         onClick={ edit }>
-                    Hozzáadás
+                    Szerkesztés
                 </Button>
             </DialogFooter>
         </Dialog>
@@ -272,7 +273,6 @@ function defaultBookEditData(): BookEditData {
     return {
         authorId: undefined,
         categoryId: undefined,
-        inventoryNumber: 0,
         publicationYear: new Date().getFullYear(),
         publisherId: undefined,
         title: ""

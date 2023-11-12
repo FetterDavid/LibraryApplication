@@ -3,9 +3,13 @@ import { Book } from "@/books/types";
 import { apiRequest } from "@/utils/api";
 
 export async function createBook(data: Unidentifiable<Book>) {
-    return apiRequest("/Book", "POST", data);
+    const temp = { ...data };
+    delete (temp as any)["inventoryData"];
+    return apiRequest("/Book", "POST", temp);
 }
 
 export async function editBook(id: number, data: Unidentifiable<Book>) {
-    return apiRequest(`/Book/${ id }`, "PUT", data);
+    const temp = { ...data };
+    delete (temp as any)["inventoryData"];
+    return apiRequest(`/Book/${ id }`, "PUT", temp);
 }
