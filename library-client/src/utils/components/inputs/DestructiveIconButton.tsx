@@ -1,9 +1,11 @@
-import { MouseEventHandler, useCallback, useEffect, useState } from "react";
+import { forwardRef, MouseEventHandler, useCallback, useEffect, useState } from "react";
 import { IconButton, IconButtonProps } from "@material-tailwind/react";
 
 export type DestructiveIconButtonProps = Omit<Omit<IconButtonProps, "color">, "variant">
 
-export default function DestructiveIconButton(props: DestructiveIconButtonProps) {
+const DestructiveIconButton = forwardRef<
+    DestructiveIconButtonProps, DestructiveIconButtonProps
+>((props, ref) => {
     const [ isConfirming, setIsConfirming ] = useState(false);
 
     useEffect(() => {
@@ -22,8 +24,10 @@ export default function DestructiveIconButton(props: DestructiveIconButtonProps)
 
     return (
         <IconButton color="red" variant={ isConfirming ? "gradient" : "text" }
-                    onClick={ fireEvent }>
+                    onClick={ fireEvent } ref={ ref as any } { ...props } >
             { props.children }
         </IconButton>
     );
-}
+});
+
+export default DestructiveIconButton;
