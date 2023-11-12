@@ -9,9 +9,9 @@
 
 A **"library-client"** mappán belül az `npm install` paranccsal lehet telepíteni a dependency-ket.
 Ezt csak egyszer kell lefuttatni, ez bele rakja a szükséges dolgokat a **"node_modules"** mappába.
-Abban az esetben, ha változnak a dependency-k, az `npm ci` paranccsal érdemes frissíteni őket (a *
-*ci** a _clean install_-t jelenti, a sima _install_ paranncsal ellentétben, ez nem piszkál bele a *
-*""package-lock.json**-be frissítéskor.).
+Abban az esetben, ha változnak a dependency-k, az `npm ci` paranccsal érdemes frissíteni őket (a 
+**ci** a _clean install_-t jelenti, a sima _install_ paranncsal ellentétben, ez nem piszkál bele a
+**package-lock.json**-be frissítéskor.).
 
 ### Futtatás
 
