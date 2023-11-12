@@ -5,8 +5,8 @@ export async function apiRequest<ResponseType = void>(
 ): Promise<ResponseType> {
     const apiOrigin = process.env["REACT_APP_API_ORIGIN"];
     if (!apiOrigin) {
-        throw new Error("Cannot find API origin, because the REACT_APP_API_ORIGIN environment" +
-            "variable is not set.");
+        throw new Error("Nem lehet megtalálni az API-t, mert a REACT_APP_API_ORIGIN" +
+            " környezeti változó nincs beállítva.");
     }
 
     const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
