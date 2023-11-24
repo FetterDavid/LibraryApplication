@@ -88,35 +88,40 @@ function MembersDataTable() {
     return (
         <DataTable dataList={ members } excludedProperties={ [ "id" ] }>
             <DataTableDataColumn list={ members } forKey="name"
-                                 header="Név"
-                                 element={ value => (
-                                     <Typography variant="small" className="font-bold">
-                                         { value }
-                                     </Typography>
-                                 ) } />
+                                 header="Név">
+                { value => (
+                    <Typography variant="small" className="font-bold">
+                        { value }
+                    </Typography>
+                ) }
+            </DataTableDataColumn>
             <DataTableDataColumn list={ members } forKey="email"
-                                 header="E-mail"
-                                 element={ value => (
-                                     <Typography variant="small">
-                                         { value }
-                                     </Typography>
-                                 ) } />
+                                 header="E-mail">
+                { value => (
+                    <Typography variant="small">
+                        { value }
+                    </Typography>
+                ) }
+            </DataTableDataColumn>
             <DataTableDataColumn list={ members } forKey="membershipType"
-                                 header="Tagság típusa"
-                                 element={ value => (
-                                     <Chip value={ value } variant="ghost"
-                                           className="w-min" color="deep-purple" />
-                                 ) } />
-            <DataTableActionColumn list={ members } element={ ({ id }) => (
-                <div className="flex flex-row gap-2">
-                    <IconButton variant="text" onClick={ () => openModal(id) }>
-                        <MaterialSymbol name="edit" />
-                    </IconButton>
-                    <DestructiveIconButton onClick={ () => attemptDelete(id) }>
-                        <MaterialSymbol name="delete" />
-                    </DestructiveIconButton>
-                </div>
-            ) } />
+                                 header="Tagság típusa">
+                { value => (
+                    <Chip value={ value } variant="ghost"
+                          className="w-min" color="deep-purple" />
+                ) }
+            </DataTableDataColumn>
+            <DataTableActionColumn list={ members }>
+                { ({ id }) => (
+                    <div className="flex flex-row gap-2">
+                        <IconButton variant="text" onClick={ () => openModal(id) }>
+                            <MaterialSymbol name="edit" />
+                        </IconButton>
+                        <DestructiveIconButton onClick={ () => attemptDelete(id) }>
+                            <MaterialSymbol name="delete" />
+                        </DestructiveIconButton>
+                    </div>
+                ) }
+            </DataTableActionColumn>
         </DataTable>
     );
 }

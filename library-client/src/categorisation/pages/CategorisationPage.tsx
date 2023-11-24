@@ -146,22 +146,25 @@ function Content<T extends Identifiable & { name: string }>(props: {
             <CardBody>
                 <DataTable dataList={ props.list } excludedProperties={ [ "id" ] }>
                     <DataTableDataColumn list={ props.list } forKey="name"
-                                         header="név"
-                                         element={ value => (
-                                             <Typography>
-                                                 { value }
-                                             </Typography>
-                                         ) } />
-                    <DataTableActionColumn list={ props.list } element={ ({ id }) => (
-                        <div className="flex flex-row gap-2">
-                            <IconButton variant="text" onClick={ () => openModal(id) }>
-                                <MaterialSymbol name="edit" />
-                            </IconButton>
-                            <DestructiveIconButton onClick={ () => attemptDelete(id) }>
-                                <MaterialSymbol name="delete" />
-                            </DestructiveIconButton>
-                        </div>
-                    ) } />
+                                         header="név">
+                        { value => (
+                            <Typography>
+                                { value }
+                            </Typography>
+                        ) }
+                    </DataTableDataColumn>
+                    <DataTableActionColumn list={ props.list }>
+                        { ({ id }) => (
+                            <div className="flex flex-row gap-2">
+                                <IconButton variant="text" onClick={ () => openModal(id) }>
+                                    <MaterialSymbol name="edit" />
+                                </IconButton>
+                                <DestructiveIconButton onClick={ () => attemptDelete(id) }>
+                                    <MaterialSymbol name="delete" />
+                                </DestructiveIconButton>
+                            </div>
+                        ) }
+                    </DataTableActionColumn>
                 </DataTable>
             </CardBody>
             <hr />

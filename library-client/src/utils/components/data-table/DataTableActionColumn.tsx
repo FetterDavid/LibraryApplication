@@ -3,18 +3,16 @@ import { DataTableContextType } from "@/utils/components/data-table/DataTableCon
 import { DataTableContext } from "@/utils/components/data-table/index";
 import { Identifiable } from "@/utils/types";
 
-export interface DataTableActionColumnProps<
-    T extends Identifiable
-> {
-    list: T[];
+export interface DataTableActionColumnProps<DataType extends Identifiable> {
+    list: DataType[];
 
-    element(entry: T): ReactNode;
+    children(entry: DataType): ReactNode;
 }
 
 export default function DataTableActionColumn<
-    T extends Identifiable
->(props: DataTableActionColumnProps<T>) {
-    const { setActionColumn } = useContext<DataTableContextType<T>>(DataTableContext);
+    DataType extends Identifiable
+>(props: DataTableActionColumnProps<DataType>) {
+    const { setActionColumn } = useContext<DataTableContextType<DataType>>(DataTableContext);
 
     useEffect(() => {
         setActionColumn(props);

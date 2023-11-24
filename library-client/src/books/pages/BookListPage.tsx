@@ -91,49 +91,56 @@ function BooksDataTable() {
     return (
         <DataTable dataList={ books } excludedProperties={ [ "id" ] }>
             <DataTableDataColumn list={ books } forKey="author"
-                                 header="Író"
-                                 element={ value => (
-                                     <Typography variant="small">
-                                         { value.name }
-                                     </Typography>
-                                 ) } />
+                                 header="Író">
+                { value => (
+                    <Typography variant="small">
+                        { value.name }
+                    </Typography>
+                ) }
+            </DataTableDataColumn>
             <DataTableDataColumn list={ books } forKey="title"
-                                 header="Cím"
-                                 element={ value => (
-                                     <Typography variant="small" className="font-bold">
-                                         { value }
-                                     </Typography>
-                                 ) } />
+                                 header="Cím">
+                { value => (
+                    <Typography variant="small" className="font-bold">
+                        { value }
+                    </Typography>
+                ) }
+            </DataTableDataColumn>
             <DataTableDataColumn list={ books } forKey="category"
-                                 header="Kategória"
-                                 element={ value => (
-                                     <Typography variant="small">
-                                         { value.name }
-                                     </Typography>
-                                 ) } />
+                                 header="Kategória">
+                { value => (
+                    <Typography variant="small">
+                        { value.name }
+                    </Typography>
+                ) }
+            </DataTableDataColumn>
             <DataTableDataColumn list={ books } forKey="publicationYear"
-                                 header="Kiadás éve"
-                                 element={ value => (
-                                     <Chip value={ value } variant="ghost"
-                                           className="w-min" color="deep-purple" />
-                                 ) } />
+                                 header="Kiadás éve">
+                { value => (
+                    <Chip value={ value } variant="ghost"
+                          className="w-min" color="deep-purple" />
+                ) }
+            </DataTableDataColumn>
             <DataTableDataColumn list={ books } forKey="publisher"
-                                 header="Kiadó"
-                                 element={ value => (
-                                     <Typography variant="small">
-                                         { value.name }
-                                     </Typography>
-                                 ) } />
-            <DataTableActionColumn list={ books } element={ ({ id }) => (
-                <div className="flex flex-row gap-2">
-                    <IconButton variant="text" onClick={ () => openModal(id) }>
-                        <MaterialSymbol name="edit" />
-                    </IconButton>
-                    <DestructiveIconButton onClick={ () => attemptDelete(id) }>
-                        <MaterialSymbol name="delete" />
-                    </DestructiveIconButton>
-                </div>
-            ) } />
+                                 header="Kiadó">
+                { value => (
+                    <Typography variant="small">
+                        { value.name }
+                    </Typography>
+                ) }
+            </DataTableDataColumn>
+            <DataTableActionColumn list={ books }>
+                { ({ id }) => (
+                    <div className="flex flex-row gap-2">
+                        <IconButton variant="text" onClick={ () => openModal(id) }>
+                            <MaterialSymbol name="edit" />
+                        </IconButton>
+                        <DestructiveIconButton onClick={ () => attemptDelete(id) }>
+                            <MaterialSymbol name="delete" />
+                        </DestructiveIconButton>
+                    </div>
+                ) }
+            </DataTableActionColumn>
         </DataTable>
     );
 }

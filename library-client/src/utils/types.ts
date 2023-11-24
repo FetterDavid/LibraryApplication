@@ -10,6 +10,8 @@ export type Unsubscribe = () => void
 
 export type Override<T, R> = Omit<T, keyof R> & R;
 
+export type OrderByDirection = "asc" | "desc"
+
 export interface ComponentClassNameProps<ElemType extends HTMLElement = HTMLDivElement> {
     className?: HTMLAttributes<ElemType>["className"];
 }
