@@ -7,12 +7,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LibraryApplication.Api.Controllers
 {
+    /// <summary>
+    /// A könyvek entitására specializált kontroller.
+    /// Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class BookController : LibraryControllerBase<Book>
     {
         public BookController(LibraryContext libraryContext) : base(libraryContext) { }
-
+        /// <summary>
+        /// Keresés a könyvek között a megadott keresési feltételek alapján.
+        /// </summary>
+        /// <param name="bookSearch">A keresési feltételeket tartalmazó DTO.</param>
+        /// <returns>A megfelelő könyvek listája vagy NotFound, ha nincs találat.</returns>
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<Book>>> Search([FromQuery] BookSearch bookSearch)
         {
@@ -31,7 +39,6 @@ namespace LibraryApplication.Api.Controllers
             }
             // Találtunk-e megfelelő könyvet
             if (books == null || books.Count == 0) return NotFound();
-
             // Rendezés
             switch (bookSearch.OrderBy)
             {
