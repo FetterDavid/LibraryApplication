@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LibraryApplication.Api</name>
+    </assembly>
+    <members>
+        <member name="T:LibraryApplication.Api.Controllers.AuthorController">
+            <summary>
+            A szerzők entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.BookAcquisitionController">
+            <summary>
+            A könyvbeszerzések entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.BookController">
+            <summary>
+            A könyvek entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>
+        </member>
+        <member name="M:LibraryApplication.Api.Controllers.BookController.Search(LibraryApplication.Contract.DataTransferObjects.BookSearch)">
+            <summary>
+            Keresés a könyvek között a megadott keresési feltételek alapján.
+            </summary>
+            <param name="bookSearch">A keresési feltételeket tartalmazó DTO.</param>
+            <returns>A megfelelő könyvek listája vagy NotFound, ha nincs találat.</returns>
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.BorrowingController">
+            <summary>
+            A kölcsönzések entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.CategoryController">
+            <summary>
+            A kategóriák entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.LateFeeController">
+            <summary>
+            A szerző entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.LibrarianController">
+            <summary>
+            A könyvtárosok entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>
+        </member>
+        <member name="M:LibraryApplication.Api.Controllers.LibrarianController.Login(LibraryApplication.Contract.DataTransferObjects.LibrarianCredentials)">
+            <summary>
+            Bejelentkezési folyamat kezelése a könyvtárosok számára.
+            </summary>
+            <param name="libCred">A bejelentkezési adatokat tartalmazó DTO.</param>
+            <returns>A bejelentkezett könyvtáros objektuma vagy NotFound, ha a bejelentkezési adatok hibásak.</returns>
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.LibraryControllerBase`1">
+            <summary>
+            Absztrakt osztály az API kontroller alapjaihoz, amely generikus CRUD műveleteket biztosít.
+            </summary>
+            <typeparam name="TEntity">A kezelt entitás típusa.</typeparam>
+        </member>
+        <member name="M:LibraryApplication.Api.Controllers.LibraryControllerBase`1.#ctor(LibraryApplication.Api.LibraryContext)">
+            <summary>
+            Konstruktor a LibraryControllerBase osztályhoz.
+            </summary>
+            <param name="libraryContext">Az adatbázis kontextusa.</param>
+        </member>
+        <member name="M:LibraryApplication.Api.Controllers.LibraryControllerBase`1.Delete(System.Int32)">
+            <summary>
+            Entitás törlése azonosító alapján.
+            </summary>
+            <param name="id">Az entitás azonosítója.</param>
+            <returns>IActionResult típusú válasz.</returns>
+        </member>
+        <member name="M:LibraryApplication.Api.Controllers.LibraryControllerBase`1.Post(`0)">
+            <summary>
+            Új entitás hozzáadása.
+            </summary>
+            <param name="entity">A hozzáadandó entitás.</param>
+            <returns>IActionResult típusú válasz.</returns>
+        </member>
+        <member name="M:LibraryApplication.Api.Controllers.LibraryControllerBase`1.Update(System.Int32,`0)">
+            <summary>
+            Entitás frissítése azonosító alapján.
+            </summary>
+            <param name="id">Az entitás azonosítója.</param>
+            <param name="entityToUpdate">A frissítendő entitás.</param>
+            <returns>IActionResult típusú válasz.</returns>
+        </member>
+        <member name="M:LibraryApplication.Api.Controllers.LibraryControllerBase`1.Get">
+            <summary>
+            Összes entitás lekérdezése.
+            </summary>
+            <returns>Az entitások listája.</returns>
+        </member>
+        <member name="M:LibraryApplication.Api.Controllers.LibraryControllerBase`1.GetById(System.Int32)">
+            <summary>
+            Egy adott entitás lekérdezése azonosító alapján.
+            </summary>
+            <param name="id">Az entitás azonosítója.</param>
+            <returns>Az entitás vagy NotFound, ha nem található.</returns>
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.MemberController">
+            <summary>
+            A tagok entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.PublisherController">
+            <summary>
+            A kiadók entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>s
+        </member>
+        <member name="T:LibraryApplication.Api.Controllers.RatingController">
+            <summary>
+            A késedelmidíjaK entitására specializált kontroller.
+            Az AuthorController az absztrakt LibraryControllerBase osztályból származik,
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Api.LibraryContext">
+            <summary>
+            A DbContext osztály, amely a könyvtári alkalmazás adatbázis kontextusát kezeli.
+            Ez az osztály az Entity Framework Core-t használja az adatbázis-entitások kezelésére.
+            </summary>
+        </member>
+        <member name="M:LibraryApplication.Api.LibraryContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            Inicializál egy új példányt a <see cref="T:LibraryApplication.Api.LibraryContext"/> osztályból a megadott opciókkal.
+            </summary>
+            <param name="options">A DbContext konfigurációs opciói.</param>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.Books">
+            <summary>
+            A könyvek tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.Members">
+            <summary>
+            A tagok tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.Borrowings">
+            <summary>
+            A kölcsönzések tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.Publishers">
+            <summary>
+            A kiadók tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.Authors">
+            <summary>
+            A szerzők tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.Categories">
+            <summary>
+            A kategóriák tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.Librarians">
+            <summary>
+            A könyvtárosok tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.Ratings">
+            <summary>
+            A értékelések tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.LateFees">
+            <summary>
+            A késedelmidíjaK tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.BookAcquisitions">
+            <summary>
+            A könyvbeszerzések tábláját reprezentálja.
+            </summary>
+        </member>
+        <member name="M:LibraryApplication.Api.Utils.Static.ConvertAccent(System.Char)">
+            <summary>
+            Atkonvertal egy karaktert ekezetnelkulive
+            </summary>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LibraryApplication.Api.Utils.Static.RemoveAccents(System.String)">
+            <summary>
+            Kicsereli az ekezeteket a szovegben ekezet nelkuli betukre
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

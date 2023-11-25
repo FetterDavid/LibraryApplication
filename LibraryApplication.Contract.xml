@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LibraryApplication.Contract</name>
+    </assembly>
+    <members>
+        <member name="T:LibraryApplication.Contract.DataTransferObjects.BookSearch">
+            <summary>
+            A könyvkeresés kritériumait tároló Data Transfer Object (DTO).
+            Ez a DTO a könyvtári alkalmazásban a könyvek kereséséhez használt információkat tartalmazza.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.DataTransferObjects.BookSearch.Text">
+            <summary>
+            A keresendő szöveg. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.DataTransferObjects.BookSearch.IsAvailable">
+            <summary>
+            Jelzi, hogy csak az elérhető könyveket keresse-e. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.DataTransferObjects.BookSearch.OrderBy">
+            <summary>
+            A találatok rendezési módja (pl. cím szerint növekvő, csökkenő). Ez a mező opcionális.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.DataTransferObjects.LibrarianCredentials">
+            <summary>
+            A könyvtárosok bejelentkezési adatait tároló Data Transfer Object (DTO).
+            Ez a DTO a könyvtári alkalmazásban a könyvtárosok bejelentkezési folyamatához használt információkat tartalmazza.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.DataTransferObjects.LibrarianCredentials.UserName">
+            <summary>
+            A könyvtáros felhasználóneve. Ez a mező kötelező a bejelentkezés során.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.DataTransferObjects.LibrarianCredentials.Password">
+            <summary>
+            A könyvtáros jelszava. Ez a mező kötelező a bejelentkezés során.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.Author">
+            <summary>
+            Az "Author" (szerző) entitás modellje a könyvtári alkalmazásban.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Author.Id">
+            <summary>
+            Az Author entitás egyedi azonosítója.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Author.Name">
+            <summary>
+            A szerző neve. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.Book">
+            <summary>
+            A "Book" (könyv) entitás modellje a könyvtári alkalmazásban.
+            Ez az osztály a könyvek alapvető adatait tartalmazza.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Book.InventoryNumber">
+            <summary>
+            A könyv egyedi leltári száma.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Book.Title">
+            <summary>
+            A könyv címe. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Book.PublicationYear">
+            <summary>
+            A könyv kiadási éve.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Book.PublisherId">
+            <summary>
+            A könyvet kiadó kiadó azonosítója.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Book.AuthorId">
+            <summary>
+            A könyv szerzőjének azonosítója.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Book.CategoryId">
+            <summary>
+            A könyv kategóriájának azonosítója.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.BookAcquisition">
+            <summary>
+            A "BookAcquisition" (könyvbeszerzés) entitás modellje a könyvtári alkalmazásban.
+            Ez az osztály a könyvek beszerzésével kapcsolatos információkat tárolja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.BookAcquisition.Id">
+            <summary>
+            A beszerzés egyedi azonosítója.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.BookAcquisition.InventoryNumber">
+            <summary>
+            A beszerzett könyv leltári száma. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.BookAcquisition.AcquisitionDate">
+            <summary>
+            A könyv beszerzésének dátuma.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.BookAcquisition.Price">
+            <summary>
+            A könyv beszerzési ára.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.BookAcquisition.AcquisitionSource">
+            <summary>
+            A beszerzés forrása (pl. könyvkereskedő, kiadó, adomány).
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.Borrowing">
+            <summary>
+            A "Borrowing" (kölcsönzés) entitás modellje a könyvtári alkalmazásban.
+            Ez az osztály a könyvkölcsönzésekkel kapcsolatos információkat tárolja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Borrowing.Id">
+            <summary>
+            A kölcsönzés egyedi azonosítója.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Borrowing.ReaderNumber">
+            <summary>
+            A könyvet kölcsönző olvasó száma. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Borrowing.InventoryNumber">
+            <summary>
+            A kölcsönzött könyv leltári száma. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Borrowing.LateFee">
+            <summary>
+            A késedelmi díj mértéke, amennyiben a könyv késedelmesen kerül vissza.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Borrowing.BorrowDate">
+            <summary>
+            A kölcsönzés kezdő dátuma. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Borrowing.ReturnDate">
+            <summary>
+            A könyv visszavitelének tervezett dátuma. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.Category">
+            <summary>
+            A "Category" (kategória) entitás modellje a könyvtári alkalmazásban.
+            Ez az osztály a könyvek kategóriáinak információit tárolja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Category.Id">
+            <summary>
+            A kategória egyedi azonosítója.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Category.Name">
+            <summary>
+            A kategória neve. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.LateFee">
+            <summary>
+            A "LateFee" (késedelmi díj) entitás modellje a könyvtári alkalmazásban.
+            Ez az osztály a késedelmes könyvvisszavitel díjazásával kapcsolatos információkat tárolja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.LateFee.Id">
+            <summary>
+            A késedelmi díj egyedi azonosítója.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.LateFee.FeeAmount">
+            <summary>
+            A késedelmi díj összege. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.LateFee.MinLateDays">
+            <summary>
+            A késedelmes napok minimális száma, amitől kezdve a díjat felszámítják. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.Librarian">
+            <summary>
+            A "Librarian" (könyvtáros) entitás modellje a könyvtári alkalmazásban.
+            Ez az osztály a könyvtárosok alapvető adatait tárolja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Librarian.Id">
+            <summary>
+            A könyvtáros egyedi azonosítója.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Librarian.Name">
+            <summary>
+            A könyvtáros neve. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Librarian.UserName">
+            <summary>
+            A könyvtáros felhasználóneve. Ez a mező kötelező, és azonosításra szolgál.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Librarian.Password">
+            <summary>
+            A könyvtáros jelszava. Ez a mező kötelező, és biztonsági okokból titkosítva kell tárolni.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Librarian.Email">
+            <summary>
+            A könyvtáros e-mail címe. Ez a mező kötelező, és kommunikációs célokra használatos.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.Member">
+            <summary>
+            A "Member" (tag) entitás modellje a könyvtári alkalmazásban.
+            Ez az osztály a könyvtár tagjainak alapvető adatait tárolja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Member.ReaderNumber">
+            <summary>
+            A tag egyedi olvasószáma.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Member.Name">
+            <summary>
+            A tag neve. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Member.Email">
+            <summary>
+            A tag e-mail címe. Ez a mező kötelező, és kommunikációs célokra használatos.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Member.MembershipType">
+            <summary>
+            A tag tagságának típusa (pl. diák, felnőtt, nyugdíjas).
+            Ez a mező opcionális.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Member.MembershipStartYear">
+            <summary>
+            Az év, amikor a tag tagsága kezdődött.
+            Ez a mező opcionális és segít nyomon követni a tagság időtartamát.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.Publisher">
+            <summary>
+            A "Publisher" (kiadó) entitás modellje a könyvtári alkalmazásban.
+            Ez az osztály a könyveket kiadó kiadók alapvető adatait tárolja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Publisher.Id">
+            <summary>
+            A kiadó egyedi azonosítója.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Publisher.Name">
+            <summary>
+            A kiadó neve. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="T:LibraryApplication.Contract.Models.Rating">
+            <summary>
+            A "Rating" (értékelés) entitás modellje a könyvtári alkalmazásban.
+            Ez az osztály a könyvek felhasználói értékeléseit tárolja.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Rating.Id">
+            <summary>
+            Az értékelés egyedi azonosítója.
+            Az adatbázisban automatikusan generált érték.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Rating.ReaderNumber">
+            <summary>
+            A könyvet értékelő olvasó száma. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Rating.InventoryNumber">
+            <summary>
+            Az értékelt könyv leltári száma. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Rating.Point">
+            <summary>
+            Az értékelés pontszáma. Ez a mező kötelező.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Rating.Comment">
+            <summary>
+            Az értékeléshez tartozó opcionális megjegyzés.
+            </summary>
+        </member>
+        <member name="P:LibraryApplication.Contract.Models.Rating.RatingDate">
+            <summary>
+            Az értékelés dátuma. Ez a mező kötelező.
+            </summary>
+        </member>
+    </members>
+</doc>
