@@ -187,6 +187,11 @@
             A könyvbeszerzések tábláját reprezentálja.
             </summary>
         </member>
+        <member name="P:LibraryApplication.Api.LibraryContext.TestEntities">
+            <summary>
+            A TestEntity tábláját reprezentálja.
+            </summary>
+        </member>
         <member name="M:LibraryApplication.Api.Utils.Static.ConvertAccent(System.Char)">
             <summary>
             Atkonvertal egy karaktert ekezetnelkulive

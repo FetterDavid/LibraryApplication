@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using LibraryApplication.Contract.Models;
+using LibraryApplication.Contract.TestModels;
 
 namespace LibraryApplication.Api
 {
@@ -59,5 +60,9 @@ namespace LibraryApplication.Api
         /// A könyvbeszerzések tábláját reprezentálja.
         /// </summary>
         public virtual DbSet<BookAcquisition> BookAcquisitions { get; set; }
+        /// <summary>
+        /// A TestEntity tábláját reprezentálja.
+        /// </summary>
+        public virtual DbSet<TestEntity> TestEntities { get; set; }
     }
 }
