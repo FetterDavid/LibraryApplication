@@ -65,14 +65,6 @@ entity "Kolcsonzesek" as Loans {
   KesedelmiDij : decimal
 }
 
-entity "KonyvtarHelyszinek" as LibraryLocations {
-  *HelyszinID : int <<PK>>
-  --
-  HelyszinNeve : string
-  Leiras : string
-  Kapacitas : int
-}
-
 entity "KesedelmiDijak" as LateFees {
   *DijID : int <<PK>>
   --
@@ -99,15 +91,13 @@ entity "KonyvtariErtekelesek" as LibraryReviews {
   ErtekelesPontszama : int
 }
 
-Books }o--o{ LibraryLocations
-Books }o--o{ Publishers
-Books }o--o{ Authors
-Books }o--o{ Categories
-Librarians }o--o{ LibraryLocations
-Loans }o--o{ Books
-Loans }o--o{ Readers
+Books }o--|| Publishers
+Books }o--|| Authors
+Books }o--|| Categories
+Loans ||--|| Books
+Loans }o--|| Readers
 LateFees }o--o{ Loans
-LibraryAcquisitions }o--o{ Books
-LibraryReviews }o--o{ Books
-LibraryReviews }o--o{ Readers
+LibraryAcquisitions ||--|| Books
+LibraryReviews }o--|| Books
+LibraryReviews }o--|| Readers
 @enduml
