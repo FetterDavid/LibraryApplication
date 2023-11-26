@@ -110,7 +110,7 @@ export default function DataTable<DataType extends Identifiable>(props: DataTabl
             { props.children }
             <Card shadow={ false } className="border">
                 <table className="table-auto rounded-lg overflow-hidden border-collapse w-full">
-                    <thead className="bg-gray-300 rounded-lg border-b border-b-gray-400">
+                    <thead className="bg-blue-gray-100 rounded-lg border-b border-b-blue-gray-200">
                     <tr className="h-12">
                         { typedObjectKeys(headers).map((key, index) => (
                             <th key={ index } className="text-start first:pl-4 last:pr-2
@@ -145,7 +145,7 @@ export default function DataTable<DataType extends Identifiable>(props: DataTabl
                     </thead>
                     <tbody className="overflow-x-scroll overflow-y-hidden">
                     { rows.map((entry, indexEntry) => (
-                        <tr key={ indexEntry } className="h-12 even:bg-gray-100">
+                        <tr key={ indexEntry } className="h-12 even:bg-blue-gray-50">
                             { typedObjectKeys(entry).map((key, indexKey) => {
                                 return props.excludedProperties?.includes(key) ? null : (
                                     <td key={ indexKey } className="px-1 first:pl-4 last:pr-4">

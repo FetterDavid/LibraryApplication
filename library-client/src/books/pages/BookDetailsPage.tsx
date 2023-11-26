@@ -11,7 +11,7 @@ import {
 } from "@material-tailwind/react";
 import { Book, BookEditData } from "@/books/types";
 import { Fragment, useCallback, useMemo, useState } from "react";
-import { editBook } from "@/books/api";
+import { deleteBook, editBook } from "@/books/api";
 import { Unidentifiable } from "@/utils/types";
 import { displayErrorNotification, displayInfoNotification } from "@/notifications";
 import { BookEditLayout } from "@/books/components";
@@ -74,6 +74,12 @@ function BookDetailsEditor(props: Book) {
             .finally(() => setLoading(false));
     }, [ props, bookData, canCreate ]);
 
+    const attemptDelete = useCallback(() => {
+        deleteBook(props.id)
+            .then(() => window.location.reload())
+            .catch(displayErrorNotification);
+    }, [ props.id ]);
+
     return (
         <Fragment>
             <hr />
@@ -85,6 +91,10 @@ function BookDetailsEditor(props: Book) {
                 <Button variant="filled" disabled={ loading }
                         onClick={ edit }>
                     Változtatások mentése
+                </Button>
+                <Button variant="filled" color="red"
+                        onClick={ attemptDelete }>
+                    Könyv törlése
                 </Button>
             </CardFooter>
         </Fragment>
@@ -104,6 +114,7 @@ function BorrowHistory(props: Book) {
                     Kölcsönzések
                 </Typography>
             </CardHeader>
+            <hr />
             <CardBody>
                 <DataTable dataList={ bookBorrowings } excludedProperties={ [ "id" ] }>
                     <DataTableDataColumn list={ bookBorrowings } forKey="reader"
