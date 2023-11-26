@@ -5,10 +5,12 @@ const container = document.getElementById("notifications-container") as HTMLDivE
 
 export function displayInfoNotification(text: string) {
     displayNotification(text, false);
+    console.log(text);
 }
 
 export function displayErrorNotification(text: string) {
     displayNotification(text, true);
+    console.error(text);
 }
 
 function displayNotification(text: string, error: boolean) {
