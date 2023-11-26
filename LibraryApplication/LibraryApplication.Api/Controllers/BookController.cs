@@ -55,7 +55,7 @@ namespace LibraryApplication.Api.Controllers
         }
 
         [HttpDelete("deep/{bookId}")]
-        public async Task<IActionResult> DeepDeleteAuthorById(int bookId)
+        public async Task<IActionResult> DeepDeleteBookById(int bookId)
         {
             Book book = await _libraryContext.Books.FindAsync(bookId);
             if (book == null)

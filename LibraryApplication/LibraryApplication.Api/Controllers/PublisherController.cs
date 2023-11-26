@@ -16,7 +16,7 @@ namespace LibraryApplication.Api.Controllers
         public PublisherController(LibraryContext libraryContext) : base(libraryContext) { }
 
         [HttpDelete("deep/{publisherId}")]
-        public async Task<IActionResult> DeepDeleteCategoryById(int publisherId)
+        public async Task<IActionResult> DeepDeletePublisherById(int publisherId)
         {
             Publisher publisher = await _libraryContext.Publishers.FindAsync(publisherId);
             if (publisher == null)
