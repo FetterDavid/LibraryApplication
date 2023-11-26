@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode, useCallback, useMemo, useState } from "react";
-import { Card, Typography } from "@material-tailwind/react";
+import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
 import { typedObjectKeys } from "@/utils/lib";
 import { Identifiable, OrderByDirection } from "@/utils/types";
 import { DataTableDataColumnProps } from "@/utils/components/data-table/DataTableDataColumn";
@@ -7,6 +7,8 @@ import { DataTableActionColumnProps } from "@/utils/components/data-table/DataTa
 import { DataTableContextType } from "@/utils/components/data-table/DataTableContext";
 import { DataTableContext } from "@/utils/components/data-table/index";
 import { MaterialSymbol } from "@/utils/components";
+
+const TABLE_PAGE_SIZE = 25;
 
 export type DataTableChildren<DataType extends Identifiable> =
     (ReactElement<DataTableDataColumnProps<DataType>> |
@@ -22,8 +24,15 @@ export interface DataTableProps<DataType extends Identifiable> {
 
 export default function DataTable<DataType extends Identifiable>(props: DataTableProps<DataType>) {
     const [ orderBy, setOrderBy ] = useState<[ keyof DataType, OrderByDirection ]>();
+    const [ currentPage, setCurrentPage ] = useState(0);
+    const numberOfPages = useMemo(() => {
+        return Math.ceil(props.dataList.length / TABLE_PAGE_SIZE);
+    }, [ props.dataList ]);
+
     const orderedDataList = useMemo<DataType[]>(() => {
-        if (!orderBy) return props.dataList;
+        const startIdx = currentPage * TABLE_PAGE_SIZE;
+        const endIdx = startIdx + TABLE_PAGE_SIZE;
+        if (!orderBy) return props.dataList.slice(startIdx, endIdx);
 
         return props.dataList.slice().sort((a, b) => {
             const propertyA = a[orderBy[0]], propertyB = b[orderBy[0]];
@@ -60,8 +69,8 @@ export default function DataTable<DataType extends Identifiable>(props: DataTabl
             }
 
             return 0;
-        });
-    }, [ orderBy, props.dataList ]);
+        }).slice(startIdx, endIdx);
+    }, [ currentPage, orderBy, props.dataList ]);
 
     const [ headers, setHeaders ] = useState<{ [key in keyof DataType]?: string }>({});
     const [ rows, setRows ] = useState<{ [key in keyof DataType]?: ReactNode }[]>(
@@ -95,7 +104,7 @@ export default function DataTable<DataType extends Identifiable>(props: DataTabl
     }, [ orderedDataList ]);
 
     // noinspection com.haulmont.rcb.ArrayToJSXMapInspection
-    return orderedDataList.length === 0 ? (
+    return props.dataList.length === 0 ? (
         <div className="w-full h-24 grid place-content-center">
             <Typography variant="lead">
                 { props.noElementsText ?? "Ebben a listában nincsenek elemek." }
@@ -166,6 +175,28 @@ export default function DataTable<DataType extends Identifiable>(props: DataTabl
                     </tbody>
                 </table>
             </Card>
+            <div className="w-full mt-6 grid grid-cols-3">
+                <Button variant="text" className="flex items-center gap-2 place-self-end"
+                        disabled={ currentPage === 0 } onClick={ () => {
+                    setCurrentPage(prevState => prevState - 1);
+                } }>
+                    <MaterialSymbol name="arrow_back" /> Előző
+                </Button>
+                <div className="flex flex-row items-center gap-2 place-self-center">
+                    { (new Array(numberOfPages).fill(null)).map((_, index) => (
+                        <IconButton key={ index } onClick={ () => setCurrentPage(index) }
+                                    variant={ currentPage === index ? "filled" : "text" }>
+                            { index + 1 }
+                        </IconButton>
+                    )) }
+                </div>
+                <Button variant="text" className="flex items-center gap-2 place-self-start"
+                        disabled={ currentPage + 1 === numberOfPages } onClick={ () => {
+                    setCurrentPage(prevState => prevState + 1);
+                } }>
+                    Következő <MaterialSymbol name="arrow_forward" />
+                </Button>
+            </div>
         </DataTableContext.Provider>
     );
 }
