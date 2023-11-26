@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>LibraryContext Methods</title><meta name="Title" content="Methods" /><meta name="Help.Id" content="Methods.T:LibraryApplication.Api.LibraryContext" /><meta name="Help.ContentType" content="Reference" /><meta name="container" content="LibraryApplication.Api" /><meta name="guid" content="dcc86585-01d1-2905-917e-5b6330bb1683" /><meta name="tocFile" content="../toc/IDAA.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div id="DocumentationTitle" class="level-item">A Sandcastle Documented Class Library</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a><a class="dropdown-item languageFilterItem" data-languageId="vb">VB</a><a class="dropdown-item languageFilterItem" data-languageId="cpp">C++</a><a class="dropdown-item languageFilterItem" data-languageId="fs">F#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div id="ContentContainer" class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="Resizer" class="is-hidden"></div><div id="TopicContent" class="column content is-7"><h1>Library<wbr />Context Methods</h1><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Methods</h2><div id="IDGDASection"><table id="MethodList" class="table is-hoverable"><tr><td><span class="noLink">Add(Object)</span></td><td><p>
+                    Begins tracking the given entity, and any other reachable entities that are
+                    not already being tracked, in the <span class="noLink">Added<span id="LSTA1723502_0" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that they will
+                    be inserted into the database when <span class="noLink">SaveChanges<span id="LSTA1723502_1" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_2" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Add``1(UMP)</span></td><td><p>
+                    Begins tracking the given entity, and any other reachable entities that are
+                    not already being tracked, in the <span class="noLink">Added<span id="LSTA1723502_3" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that
+                    they will be inserted into the database when <span class="noLink">SaveChanges<span id="LSTA1723502_4" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_5" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">AddAsync(Object, CancellationToken)</span></td><td><p>
+                    Begins tracking the given entity, and any other reachable entities that are
+                    not already being tracked, in the <span class="noLink">Added<span id="LSTA1723502_6" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that they will
+                    be inserted into the database when <span class="noLink">SaveChanges<span id="LSTA1723502_7" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_8" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><p>
+                    This method is async only to allow special value generators, such as the one used by
+                    'Microsoft.EntityFrameworkCore.Metadata.SqlServerValueGenerationStrategy.SequenceHiLo',
+                    to access the database asynchronously. For all other cases the non async method should be used.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a>
+                    for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">AddAsync``1(UMP, CancellationToken)</span></td><td><p>
+                    Begins tracking the given entity, and any other reachable entities that are
+                    not already being tracked, in the <span class="noLink">Added<span id="LSTA1723502_9" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that they will
+                    be inserted into the database when <span class="noLink">SaveChanges<span id="LSTA1723502_10" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    This method is async only to allow special value generators, such as the one used by
+                    'Microsoft.EntityFrameworkCore.Metadata.SqlServerValueGenerationStrategy.SequenceHiLo',
+                    to access the database asynchronously. For all other cases the non async method should be used.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a>
+                    for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">AddRange(IEnumerable<span id="LSTA1723502_11" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Object<span id="LSTA1723502_12" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</span></td><td>
+                Begins tracking the given entities, and any other reachable entities that are
+                not already being tracked, in the <span class="noLink">Added<span id="LSTA1723502_13" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that they will
+                be inserted into the database when <span class="noLink">SaveChanges<span id="LSTA1723502_14" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">AddRange(<span id="LSTA1723502_15" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_16" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+                Begins tracking the given entities, and any other reachable entities that are
+                not already being tracked, in the <span class="noLink">Added<span id="LSTA1723502_17" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that they will
+                be inserted into the database when <span class="noLink">SaveChanges<span id="LSTA1723502_18" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">AddRangeAsync(<span id="LSTA1723502_19" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_20" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td><p>
+                    Begins tracking the given entity, and any other reachable entities that are
+                    not already being tracked, in the <span class="noLink">Added<span id="LSTA1723502_21" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that they will
+                    be inserted into the database when <span class="noLink">SaveChanges<span id="LSTA1723502_22" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    This method is async only to allow special value generators, such as the one used by
+                    'Microsoft.EntityFrameworkCore.Metadata.SqlServerValueGenerationStrategy.SequenceHiLo',
+                    to access the database asynchronously. For all other cases the non async method should be used.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a>
+                    for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">AddRangeAsync(IEnumerable<span id="LSTA1723502_23" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Object<span id="LSTA1723502_24" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, CancellationToken)</span></td><td><p>
+                    Begins tracking the given entity, and any other reachable entities that are
+                    not already being tracked, in the <span class="noLink">Added<span id="LSTA1723502_25" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that they will
+                    be inserted into the database when <span class="noLink">SaveChanges<span id="LSTA1723502_26" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    This method is async only to allow special value generators, such as the one used by
+                    'Microsoft.EntityFrameworkCore.Metadata.SqlServerValueGenerationStrategy.SequenceHiLo',
+                    to access the database asynchronously. For all other cases the non async method should be used.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a>
+                    for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Attach(Object)</span></td><td><p>
+                    Begins tracking the given entity and entries reachable from the given entity using
+                    the <span class="noLink">Unchanged<span id="LSTA1723502_27" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state by default, but see below for cases
+                    when a different state will be used.
+                </p><p>
+                    Generally, no database interaction will be performed until <span class="noLink">SaveChanges<span id="LSTA1723502_28" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    A recursive search of the navigation properties will be performed to find reachable entities
+                    that are not already being tracked by the context. All entities found will be tracked
+                    by the context.
+                </p><p>
+                    For entity types with generated keys if an entity has its primary key value set
+                    then it will be tracked in the <span class="noLink">Unchanged<span id="LSTA1723502_29" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state. If the primary key
+                    value is not set then it will be tracked in the <span class="noLink">Added<span id="LSTA1723502_30" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state.
+                    This helps ensure only new entities will be inserted.
+                    An entity is considered to have its primary key value set if the primary key property is set
+                    to anything other than the CLR default for the property type.
+                </p><p>
+                    For entity types without generated keys, the state set is always <span class="noLink">Unchanged<span id="LSTA1723502_31" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_32" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Attach``1(UMP)</span></td><td><p>
+                    Begins tracking the given entity and entries reachable from the given entity using
+                    the <span class="noLink">Unchanged<span id="LSTA1723502_33" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state by default, but see below for cases
+                    when a different state will be used.
+                </p><p>
+                    Generally, no database interaction will be performed until <span class="noLink">SaveChanges<span id="LSTA1723502_34" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    A recursive search of the navigation properties will be performed to find reachable entities
+                    that are not already being tracked by the context. All entities found will be tracked
+                    by the context.
+                </p><p>
+                    For entity types with generated keys if an entity has its primary key value set
+                    then it will be tracked in the <span class="noLink">Unchanged<span id="LSTA1723502_35" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state. If the primary key
+                    value is not set then it will be tracked in the <span class="noLink">Added<span id="LSTA1723502_36" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state.
+                    This helps ensure only new entities will be inserted.
+                    An entity is considered to have its primary key value set if the primary key property is set
+                    to anything other than the CLR default for the property type.
+                </p><p>
+                    For entity types without generated keys, the state set is always <span class="noLink">Unchanged<span id="LSTA1723502_37" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_38" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">AttachRange(IEnumerable<span id="LSTA1723502_39" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Object<span id="LSTA1723502_40" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</span></td><td><p>
+                    Begins tracking the given entities and entries reachable from the given entities using
+                    the <span class="noLink">Unchanged<span id="LSTA1723502_41" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state by default, but see below for cases
+                    when a different state will be used.
+                </p><p>
+                    Generally, no database interaction will be performed until <span class="noLink">SaveChanges<span id="LSTA1723502_42" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    A recursive search of the navigation properties will be performed to find reachable entities
+                    that are not already being tracked by the context. All entities found will be tracked
+                    by the context.
+                </p><p>
+                    For entity types with generated keys if an entity has its primary key value set
+                    then it will be tracked in the <span class="noLink">Unchanged<span id="LSTA1723502_43" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state. If the primary key
+                    value is not set then it will be tracked in the <span class="noLink">Added<span id="LSTA1723502_44" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state.
+                    This helps ensure only new entities will be inserted.
+                    An entity is considered to have its primary key value set if the primary key property is set
+                    to anything other than the CLR default for the property type.
+                </p><p>
+                    For entity types without generated keys, the state set is always <span class="noLink">Unchanged<span id="LSTA1723502_45" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_46" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">AttachRange(<span id="LSTA1723502_47" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_48" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td><p>
+                    Begins tracking the given entities and entries reachable from the given entities using
+                    the <span class="noLink">Unchanged<span id="LSTA1723502_49" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state by default, but see below for cases
+                    when a different state will be used.
+                </p><p>
+                    Generally, no database interaction will be performed until <span class="noLink">SaveChanges<span id="LSTA1723502_50" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    A recursive search of the navigation properties will be performed to find reachable entities
+                    that are not already being tracked by the context. All entities found will be tracked
+                    by the context.
+                </p><p>
+                    For entity types with generated keys if an entity has its primary key value set
+                    then it will be tracked in the <span class="noLink">Unchanged<span id="LSTA1723502_51" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state. If the primary key
+                    value is not set then it will be tracked in the <span class="noLink">Added<span id="LSTA1723502_52" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state.
+                    This helps ensure only new entities will be inserted.
+                    An entity is considered to have its primary key value set if the primary key property is set
+                    to anything other than the CLR default for the property type.
+                </p><p>
+                    For entity types without generated keys, the state set is always <span class="noLink">Unchanged<span id="LSTA1723502_53" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_54" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">ConfigureConventions</span></td><td>
+                Override this method to set defaults and configure conventions before they run. This method is invoked before
+                <span class="noLink">OnModelCreating(ModelBuilder)</span>.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Dispose</span></td><td>
+                Releases the allocated resources for this context.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">DisposeAsync</span></td><td><p>
+                    Releases the allocated resources for this context.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a>
+                    for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Entry(Object)</span></td><td><p>
+                    Gets an <span class="noLink">EntityEntry</span> for the given entity. The entry provides
+                    access to change tracking information and operations for the entity.
+                </p><p>
+                    This method may be called on an entity that is not tracked. You can then
+                    set the <span class="noLink">State<span id="LSTA1723502_55" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> property on the returned entry
+                    to have the context begin tracking the entity in the specified state.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Entry``1(UMP)</span></td><td>
+                Gets an <span class="noLink">EntityEntry</span> for the given entity. The entry provides
+                access to change tracking information and operations for the entity.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Finalize</span></td><td>Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.<br />(Inherited from <span class="noLink">Object</span>)</td></tr><tr><td><span class="noLink">Find(Type, <span id="LSTA1723502_56" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_57" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+                Finds an entity with the given primary key values. If an entity with the given primary key values
+                is being tracked by the context, then it is returned immediately without making a request to the
+                database. Otherwise, a query is made to the database for an entity with the given primary key values
+                and this entity, if found, is attached to the context and returned. If no entity is found, then
+                null is returned.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Find``1(<span id="LSTA1723502_58" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_59" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+                Finds an entity with the given primary key values. If an entity with the given primary key values
+                is being tracked by the context, then it is returned immediately without making a request to the
+                database. Otherwise, a query is made to the database for an entity with the given primary key values
+                and this entity, if found, is attached to the context and returned. If no entity is found, then
+                null is returned.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">FindAsync(Type, <span id="LSTA1723502_60" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_61" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td><p>
+                    Finds an entity with the given primary key values. If an entity with the given primary key values
+                    is being tracked by the context, then it is returned immediately without making a request to the
+                    database. Otherwise, a query is made to the database for an entity with the given primary key values
+                    and this entity, if found, is attached to the context and returned. If no entity is found, then
+                    null is returned.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a>
+                    for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">FindAsync(Type, <span id="LSTA1723502_62" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_63" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, CancellationToken)</span></td><td><p>
+                    Finds an entity with the given primary key values. If an entity with the given primary key values
+                    is being tracked by the context, then it is returned immediately without making a request to the
+                    database. Otherwise, a query is made to the database for an entity with the given primary key values
+                    and this entity, if found, is attached to the context and returned. If no entity is found, then
+                    null is returned.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a>
+                    for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">FindAsync``1(<span id="LSTA1723502_64" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_65" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td><p>
+                    Finds an entity with the given primary key values. If an entity with the given primary key values
+                    is being tracked by the context, then it is returned immediately without making a request to the
+                    database. Otherwise, a query is made to the database for an entity with the given primary key values
+                    and this entity, if found, is attached to the context and returned. If no entity is found, then
+                    null is returned.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a>
+                    for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">FindAsync``1(<span id="LSTA1723502_66" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_67" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, CancellationToken)</span></td><td><p>
+                    Finds an entity with the given primary key values. If an entity with the given primary key values
+                    is being tracked by the context, then it is returned immediately without making a request to the
+                    database. Otherwise, a query is made to the database for an entity with the given primary key values
+                    and this entity, if found, is attached to the context and returned. If no entity is found, then
+                    null is returned.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a>
+                    for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">FromExpression``1</span></td><td>
+                Creates a queryable for given query expression.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">GetType</span></td><td>Gets the <span class="noLink">Type</span> of the current instance.<br />(Inherited from <span class="noLink">Object</span>)</td></tr><tr><td><span class="noLink">MemberwiseClone</span></td><td>Creates a shallow copy of the current <span class="noLink">Object</span>.<br />(Inherited from <span class="noLink">Object</span>)</td></tr><tr><td><span class="noLink">OnConfiguring</span></td><td><p>
+                    Override this method to configure the database (and other options) to be used for this context.
+                    This method is called for each instance of the context that is created.
+                    The base implementation does nothing.
+                </p><p>
+                    In situations where an instance of <span class="noLink">DbContextOptions</span> may or may not have been passed
+                    to the constructor, you can use <span class="noLink">IsConfigured<span id="LSTA1723502_68" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to determine if
+                    the options have already been set, and skip some or all of the logic in
+                    <span class="noLink">OnConfiguring(DbContextOptionsBuilder)</span>.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">OnModelCreating</span></td><td>
+                Override this method to further configure the model that was discovered by convention from the entity types
+                exposed in <span class="noLink">DbSet</span> properties on your derived context. The resulting model may be cached
+                and re-used for subsequent instances of your derived context.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Remove(Object)</span></td><td>
+                Begins tracking the given entity in the <span class="noLink">Deleted<span id="LSTA1723502_69" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that it will
+                be removed from the database when <span class="noLink">SaveChanges<span id="LSTA1723502_70" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Remove``1(UMP)</span></td><td>
+                Begins tracking the given entity in the <span class="noLink">Deleted<span id="LSTA1723502_71" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that it will
+                be removed from the database when <span class="noLink">SaveChanges<span id="LSTA1723502_72" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">RemoveRange(IEnumerable<span id="LSTA1723502_73" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Object<span id="LSTA1723502_74" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</span></td><td>
+                Begins tracking the given entity in the <span class="noLink">Deleted<span id="LSTA1723502_75" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that it will
+                be removed from the database when <span class="noLink">SaveChanges<span id="LSTA1723502_76" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">RemoveRange(<span id="LSTA1723502_77" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_78" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+                Begins tracking the given entity in the <span class="noLink">Deleted<span id="LSTA1723502_79" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state such that it will
+                be removed from the database when <span class="noLink">SaveChanges<span id="LSTA1723502_80" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+            <br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">SaveChanges<span id="LSTA1723502_81" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td><p>
+                    Saves all changes made in this context to the database.
+                </p><p>
+                    This method will automatically call <span class="noLink">DetectChanges<span id="LSTA1723502_82" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to discover any
+                    changes to entity instances before saving to the underlying database. This can be disabled via
+                    <span class="noLink">AutoDetectChangesEnabled<span id="LSTA1723502_83" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a> for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">SaveChanges(Boolean)</span></td><td><p>
+                    Saves all changes made in this context to the database.
+                </p><p>
+                    This method will automatically call <span class="noLink">DetectChanges<span id="LSTA1723502_84" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to discover any
+                    changes to entity instances before saving to the underlying database. This can be disabled via
+                    <span class="noLink">AutoDetectChangesEnabled<span id="LSTA1723502_85" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a> for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">SaveChangesAsync(CancellationToken)</span></td><td><p>
+                    Saves all changes made in this context to the database.
+                </p><p>
+                    This method will automatically call <span class="noLink">DetectChanges<span id="LSTA1723502_86" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to discover any
+                    changes to entity instances before saving to the underlying database. This can be disabled via
+                    <span class="noLink">AutoDetectChangesEnabled<span id="LSTA1723502_87" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a> for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">SaveChangesAsync(Boolean, CancellationToken)</span></td><td><p>
+                    Saves all changes made in this context to the database.
+                </p><p>
+                    This method will automatically call <span class="noLink">DetectChanges<span id="LSTA1723502_88" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to discover any
+                    changes to entity instances before saving to the underlying database. This can be disabled via
+                    <span class="noLink">AutoDetectChangesEnabled<span id="LSTA1723502_89" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a> for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Set``1<span id="LSTA1723502_90" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td><p>
+                    Creates a <span class="noLink">DbSet</span> that can be used to query and save instances of <span class="parameter">TEntity</span>.
+                </p><p>
+                    Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This
+                    includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+                    Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+                    in parallel. See <a href="https://aka.ms/efcore-docs-threading" target="_blank" rel="noopener noreferrer">Avoiding DbContext threading issues</a> for more information.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Set``1(String)</span></td><td><p>
+                    Creates a <span class="noLink">DbSet</span> for a shared-type entity type that can be used to query and save
+                    instances of <span class="parameter">TEntity</span>.
+                </p><p>
+                    Shared-type entity types are typically used for the join entity in many-to-many relationships.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Update(Object)</span></td><td><p>
+                    Begins tracking the given entity and entries reachable from the given entity using
+                    the <span class="noLink">Modified<span id="LSTA1723502_91" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state by default, but see below for cases
+                    when a different state will be used.
+                </p><p>
+                    Generally, no database interaction will be performed until <span class="noLink">SaveChanges<span id="LSTA1723502_92" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    A recursive search of the navigation properties will be performed to find reachable entities
+                    that are not already being tracked by the context. All entities found will be tracked
+                    by the context.
+                </p><p>
+                    For entity types with generated keys if an entity has its primary key value set
+                    then it will be tracked in the <span class="noLink">Modified<span id="LSTA1723502_93" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state. If the primary key
+                    value is not set then it will be tracked in the <span class="noLink">Added<span id="LSTA1723502_94" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state.
+                    This helps ensure new entities will be inserted, while existing entities will be updated.
+                    An entity is considered to have its primary key value set if the primary key property is set
+                    to anything other than the CLR default for the property type.
+                </p><p>
+                    For entity types without generated keys, the state set is always <span class="noLink">Modified<span id="LSTA1723502_95" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_96" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">Update``1(UMP)</span></td><td><p>
+                    Begins tracking the given entity and entries reachable from the given entity using
+                    the <span class="noLink">Modified<span id="LSTA1723502_97" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state by default, but see below for cases
+                    when a different state will be used.
+                </p><p>
+                    Generally, no database interaction will be performed until <span class="noLink">SaveChanges<span id="LSTA1723502_98" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    A recursive search of the navigation properties will be performed to find reachable entities
+                    that are not already being tracked by the context. All entities found will be tracked
+                    by the context.
+                </p><p>
+                    For entity types with generated keys if an entity has its primary key value set
+                    then it will be tracked in the <span class="noLink">Modified<span id="LSTA1723502_99" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state. If the primary key
+                    value is not set then it will be tracked in the <span class="noLink">Added<span id="LSTA1723502_100" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state.
+                    This helps ensure new entities will be inserted, while existing entities will be updated.
+                    An entity is considered to have its primary key value set if the primary key property is set
+                    to anything other than the CLR default for the property type.
+                </p><p>
+                    For entity types without generated keys, the state set is always <span class="noLink">Modified<span id="LSTA1723502_101" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_102" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">UpdateRange(IEnumerable<span id="LSTA1723502_103" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Object<span id="LSTA1723502_104" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</span></td><td><p>
+                    Begins tracking the given entities and entries reachable from the given entities using
+                    the <span class="noLink">Modified<span id="LSTA1723502_105" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state by default, but see below for cases
+                    when a different state will be used.
+                </p><p>
+                    Generally, no database interaction will be performed until <span class="noLink">SaveChanges<span id="LSTA1723502_106" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    A recursive search of the navigation properties will be performed to find reachable entities
+                    that are not already being tracked by the context. All entities found will be tracked
+                    by the context.
+                </p><p>
+                    For entity types with generated keys if an entity has its primary key value set
+                    then it will be tracked in the <span class="noLink">Modified<span id="LSTA1723502_107" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state. If the primary key
+                    value is not set then it will be tracked in the <span class="noLink">Added<span id="LSTA1723502_108" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state.
+                    This helps ensure new entities will be inserted, while existing entities will be updated.
+                    An entity is considered to have its primary key value set if the primary key property is set
+                    to anything other than the CLR default for the property type.
+                </p><p>
+                    For entity types without generated keys, the state set is always <span class="noLink">Modified<span id="LSTA1723502_109" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_110" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr><tr><td><span class="noLink">UpdateRange(<span id="LSTA1723502_111" data-languageSpecificText="cpp=array&lt;"></span>Object<span id="LSTA1723502_112" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td><p>
+                    Begins tracking the given entities and entries reachable from the given entities using
+                    the <span class="noLink">Modified<span id="LSTA1723502_113" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state by default, but see below for cases
+                    when a different state will be used.
+                </p><p>
+                    Generally, no database interaction will be performed until <span class="noLink">SaveChanges<span id="LSTA1723502_114" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> is called.
+                </p><p>
+                    A recursive search of the navigation properties will be performed to find reachable entities
+                    that are not already being tracked by the context. All entities found will be tracked
+                    by the context.
+                </p><p>
+                    For entity types with generated keys if an entity has its primary key value set
+                    then it will be tracked in the <span class="noLink">Modified<span id="LSTA1723502_115" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state. If the primary key
+                    value is not set then it will be tracked in the <span class="noLink">Added<span id="LSTA1723502_116" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> state.
+                    This helps ensure new entities will be inserted, while existing entities will be updated.
+                    An entity is considered to have its primary key value set if the primary key property is set
+                    to anything other than the CLR default for the property type.
+                </p><p>
+                    For entity types without generated keys, the state set is always <span class="noLink">Modified<span id="LSTA1723502_117" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span>.
+                </p><p>
+                    Use <span class="noLink">State<span id="LSTA1723502_118" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span> to set the state of only a single entity.
+                </p><br />(Inherited from <span class="noLink">DbContext</span>)</td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>See Also</h2><div id="seeAlsoSection"><h4>Reference</h4><div><a href="1e8e1dc2-b459-1a56-2909-6eefc5f79843.htm">LibraryContext Class</a></div><div><a href="9e3eca18-05fe-9f88-a98e-120fc41ee16a.htm">LibraryApplication.Api Namespace</a></div></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Methods</a></li><li><a class="quickLink">See Also</a></li></ul></nav></div></div></div><footer id="PageFooter" class="footer border-top py-3 fixedFooter"><div class="columns"><div class="column"> 
+				</div><div class="column"> 
+				</div></div></footer></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+});</script></body></html>
