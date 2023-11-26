@@ -34,7 +34,7 @@ function MainNavbar() {
         lg:px-8 lg:py-4 flex flex-row justify-between items-center
         col-start-1 col-span-full row-start-1 row-span-1">
             <Typography color="black" className="font-serif select-none" variant="h5">
-                Library Application
+                LibDrone
             </Typography>
             <Tooltip content="Kijelentkezés" placement="left">
                 <DestructiveIconButton onClick={ logout }>
