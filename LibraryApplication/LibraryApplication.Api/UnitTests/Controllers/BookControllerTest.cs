@@ -24,6 +24,7 @@ namespace LibraryApplication.Api.UnitTests.Controllers
             var controller = new BookController(context);
             // Tesztadatok hozzáadása
             context.Books.AddRange(
+                new Book { Title = "Book 1" },
                 new Book { Title = "Another Book" });
             await context.SaveChangesAsync();
             var bookSearch = new BookSearch
