@@ -1,5 +1,5 @@
 import { Unidentifiable } from "@/utils/types";
-import { Book } from "@/books/types";
+import { Book, BookWithFullInfo } from "@/books/types";
 import { apiRequest } from "@/utils/api";
 import { CategorisationObject } from "@/categorisation/types";
 
@@ -34,4 +34,35 @@ export async function getBook(id: number) {
         author: categorisationData[1],
         publisher: categorisationData[2]
     };
+}
+
+export async function searchBooks(
+    title: string, isAvailable: boolean
+): Promise<BookWithFullInfo[]> {
+    const params = new URLSearchParams({
+        "Text": title,
+        "IsAvailable": String(isAvailable),
+        "OrderBy": "TitleAsc"
+    });
+
+    const books = await apiRequest<Book[]>(`/Book/search?${ params }`, "GET");
+    const out: BookWithFullInfo[] = [];
+
+    for (const b of books) {
+        const categorisationData = await Promise.all([ `/Category/${ b.categoryId }`,
+            `/Author/${ b.authorId }`,
+            `/Publisher/${ b.publisherId }` ].map(endpoint => {
+            return apiRequest<CategorisationObject>(endpoint, "GET");
+        }));
+
+        out.push({
+            ...b,
+            id: (b as any)["inventoryNumber"],
+            category: categorisationData[0],
+            author: categorisationData[1],
+            publisher: categorisationData[2]
+        });
+    }
+
+    return out;
 }

@@ -5,6 +5,7 @@ import {
     CardBody,
     CardFooter,
     CardHeader,
+    Checkbox,
     Chip,
     Dialog,
     DialogBody,
@@ -19,16 +20,15 @@ import {
     DataTableActionColumn,
     DataTableDataColumn
 } from "@/utils/components/data-table";
-import { Fragment, useCallback, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Book, BookEditData } from "@/books/types";
+import { Book, BookEditData, BookWithFullInfo } from "@/books/types";
 import { BookEditLayout } from "@/books/components";
-import { createBook, deleteBook } from "@/books/api";
+import { createBook, deleteBook, searchBooks } from "@/books/api";
 import { Unidentifiable } from "@/utils/types";
 import { displayErrorNotification, displayInfoNotification } from "@/notifications";
 import { MaterialSymbol } from "@/utils/components";
 import { DestructiveIconButton } from "@/utils/components/inputs";
-import { contains } from "@/utils/lib";
 
 const PARAM_KEY_MODAL = "modal";
 const PARAM_VALUE_MODAL_NEW_BOOK = "new-book";
@@ -69,16 +69,10 @@ export default function BookListPage() {
 
 function BooksDataTable() {
     const { books } = useLibraryFromContext();
+    const [ filteredBooks, setFilteredBooks ] = useState<BookWithFullInfo[]>(books);
 
-    const [ titleFilter, setTitleFilter ] = useState("");
-    const [ authorFilter, setAuthorFilter ] = useState("");
-    const [ publisherFilter, setPublisherFilter ] = useState("");
-
-    const filteredBooks = useMemo(() => books.filter(value => (
-        (!!titleFilter ? contains(value.title, titleFilter) : true) &&
-        (!!authorFilter ? contains(value.author.name, authorFilter) : true) &&
-        (!!publisherFilter ? contains(value.publisher.name, publisherFilter) : true)
-    )), [ authorFilter, books, publisherFilter, titleFilter ]);
+    const [ filterTitle, setFilterTitle ] = useState("");
+    const [ filterIsAvailable, setFilterIsAvailable ] = useState(true);
 
     const attemptDelete = useCallback((id: number) => {
         deleteBook(id)
@@ -86,18 +80,35 @@ function BooksDataTable() {
             .catch(displayErrorNotification);
     }, []);
 
+    const updateFilters = useCallback(() => {
+        searchBooks(filterTitle, filterIsAvailable)
+            .then(setFilteredBooks)
+            .catch(console.warn);
+    }, [ filterIsAvailable, filterTitle ]);
+
+    const clearFilters = useCallback(() => {
+        setFilteredBooks(books);
+    }, [ books ]);
+
+    useEffect(() => {
+        if (!filterTitle) clearFilters();
+    }, [ clearFilters, filterTitle ]);
+
     return (
         <div className="flex flex-col items-stretch gap-2">
-            <div className="w-full grid grid-cols-3 gap-2">
-                <Input crossOrigin="" value={ titleFilter }
-                       onChange={ event => setTitleFilter(event.target.value) }
-                       label="Cím" />
-                <Input crossOrigin="" value={ authorFilter }
-                       onChange={ event => setAuthorFilter(event.target.value) }
-                       label="Író" />
-                <Input crossOrigin="" value={ publisherFilter }
-                       onChange={ event => setPublisherFilter(event.target.value) }
-                       label="Kiadó" />
+            <div className="w-full flex flex-row items-center gap-2">
+                <div className="relative flex w-full max-w-[24rem]">
+                    <Input crossOrigin="" value={ filterTitle }
+                           onChange={ event => setFilterTitle(event.target.value) }
+                           label="Cím" containerProps={ { className: "min-w-0" } } />
+                    <Button size="sm" disabled={ !filterTitle } onClick={ updateFilters }
+                            className="!absolute right-1 top-1 rounded">
+                        Keresés
+                    </Button>
+                </div>
+                <Checkbox crossOrigin="" checked={ filterIsAvailable } onChange={ event => {
+                    setFilterIsAvailable(event.target.checked);
+                } } label="Elérhető kölcsönzésre" disabled={ !filterTitle } />
             </div>
             <DataTable dataList={ filteredBooks } excludedProperties={ [ "id" ] }>
                 <DataTableDataColumn list={ filteredBooks } forKey="author"
