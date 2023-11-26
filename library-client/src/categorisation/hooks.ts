@@ -41,6 +41,7 @@ export function useCategorisationObjectDetails(
     useEffect(() => {
         if (id < 0) {
             setLoading(false);
+            setData(undefined);
             return;
         }
 

@@ -6,6 +6,7 @@ import { BookListPage } from "@/books/pages";
 import { CategorisationPage } from "@/categorisation/pages";
 import { MemberListPage } from "@/members/pages";
 import { AcquisitionsPage } from "@/acquisitions/pages";
+import { BorrowingPage } from "@/borrowing/pages";
 
 function App() {
     return (
@@ -21,6 +22,9 @@ function App() {
                 </Route>
                 <Route path="members">
                     <Route index element={ <MemberListPage /> } />
+                </Route>
+                <Route path="borrowing">
+                    <Route index element={ <BorrowingPage /> } />
                 </Route>
                 <Route path="acquisitions">
                     <Route index element={ <AcquisitionsPage /> } />

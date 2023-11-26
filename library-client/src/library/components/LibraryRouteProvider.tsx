@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { useCategorisationObjectList } from "@/categorisation/hooks";
 import { useMemberList } from "@/members/hooks";
 import { useAcquisitionList } from "@/acquisitions/hooks";
+import { useBorrowList } from "@/borrowing/hooks";
 
 export default function LibraryRouteProvider() {
     const [ books, loadingBooks ] = useBookList();
@@ -14,12 +15,13 @@ export default function LibraryRouteProvider() {
     const [ publishers, loadingPublishers ] = useCategorisationObjectList("publishers");
     const [ members, loadingMembers ] = useMemberList();
     const [ acquisitions, loadingAcquisitions ] = useAcquisitionList();
+    const [ borrowings, loadingBorrowings ] = useBorrowList();
 
     const loading = useMemo(() => {
         return loadingBooks || loadingCategories || loadingAuthors || loadingPublishers ||
-            loadingMembers || loadingAcquisitions;
+            loadingMembers || loadingAcquisitions || loadingBorrowings;
     }, [ loadingAcquisitions, loadingAuthors, loadingBooks,
-        loadingCategories, loadingMembers, loadingPublishers ]);
+        loadingBorrowings, loadingCategories, loadingMembers, loadingPublishers ]);
 
     const error = useMemo(() => {
         return ![ books, categories, authors, publishers, members, acquisitions ]
@@ -33,7 +35,7 @@ export default function LibraryRouteProvider() {
             </LoadingViewError>
             <LoadingViewContent>
                 <LibraryContext.Provider value={
-                    { books, categories, authors, publishers, members, acquisitions }
+                    { books, categories, authors, publishers, members, acquisitions, borrowings }
                 }>
                     <Outlet />
                 </LibraryContext.Provider>

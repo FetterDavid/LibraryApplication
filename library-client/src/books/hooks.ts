@@ -42,6 +42,7 @@ export function useBookDetails(id: number): [ BookWithFullInfo | undefined, bool
     useEffect(() => {
         if (id < 0) {
             setLoading(false);
+            setData(undefined);
             return;
         }
 

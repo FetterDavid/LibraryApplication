@@ -2,7 +2,7 @@ import { DataEditLayoutComponentProps } from "@/utils/types";
 import { MemberEditData } from "@/members/types";
 import { Input } from "@material-tailwind/react";
 
-export function MemberEditLayout(props: DataEditLayoutComponentProps<MemberEditData>) {
+export default function MemberEditLayout(props: DataEditLayoutComponentProps<MemberEditData>) {
     return (
         <div className="w-full flex flex-col items-stretch gap-2">
             <Input crossOrigin="" value={ props.data.name } onChange={ event => {

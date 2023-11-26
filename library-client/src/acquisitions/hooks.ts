@@ -33,6 +33,7 @@ export function useAcquisitionDetails(
     useEffect(() => {
         if (id < 0) {
             setLoading(false);
+            setDetails(undefined);
             return;
         }
 

@@ -24,7 +24,7 @@ import {
 import { MaterialSymbol } from "@/utils/components";
 import { displayErrorNotification } from "@/notifications";
 import { MemberEditData } from "@/members/types";
-import { MemberEditLayout } from "@/members/components/MemberEditLayout";
+import { MemberEditLayout } from "@/members/components";
 import { createMember, deleteMember, editMember } from "@/members/api";
 import { useMemberDetails } from "@/members/hooks";
 import { DestructiveIconButton } from "@/utils/components/inputs";
