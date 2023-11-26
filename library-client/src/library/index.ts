@@ -6,5 +6,7 @@ export const LibraryContext = createContext<Library>({
     categories: undefined as any,
     authors: undefined as any,
     publishers: undefined as any,
-    members: undefined as any
+    members: undefined as any,
+    acquisitions: undefined as any,
+    borrowings: undefined as any
 });

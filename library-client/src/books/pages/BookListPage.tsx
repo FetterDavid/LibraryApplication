@@ -11,7 +11,7 @@ import {
     DialogFooter,
     DialogHeader,
     IconButton,
-    Spinner,
+    Input,
     Typography
 } from "@material-tailwind/react";
 import {
@@ -19,21 +19,19 @@ import {
     DataTableActionColumn,
     DataTableDataColumn
 } from "@/utils/components/data-table";
-import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Fragment, useCallback, useMemo, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Book, BookEditData } from "@/books/types";
 import { BookEditLayout } from "@/books/components";
-import { createBook, deleteBook, editBook } from "@/books/api";
+import { createBook, deleteBook } from "@/books/api";
 import { Unidentifiable } from "@/utils/types";
 import { displayErrorNotification, displayInfoNotification } from "@/notifications";
-import { useBookDetails } from "@/books/hooks";
 import { MaterialSymbol } from "@/utils/components";
 import { DestructiveIconButton } from "@/utils/components/inputs";
+import { contains } from "@/utils/lib";
 
 const PARAM_KEY_MODAL = "modal";
 const PARAM_VALUE_MODAL_NEW_BOOK = "new-book";
-const PARAM_VALUE_MODAL_EDIT_BOOK = "edit-book";
-const PARAM_KEY_ID = "id";
 
 export default function BookListPage() {
     const [ , setSearchParams ] = useSearchParams();
@@ -65,22 +63,22 @@ export default function BookListPage() {
                 </CardFooter>
             </Card>
             <NewBookModal />
-            <EditBookModal />
         </Fragment>
     );
 }
 
 function BooksDataTable() {
     const { books } = useLibraryFromContext();
-    const [ , setSearchParams ] = useSearchParams();
 
-    const openModal = useCallback((id: number) => {
-        setSearchParams(prevState => {
-            prevState.set(PARAM_KEY_MODAL, PARAM_VALUE_MODAL_EDIT_BOOK);
-            prevState.set(PARAM_KEY_ID, String(id));
-            return prevState;
-        });
-    }, [ setSearchParams ]);
+    const [ titleFilter, setTitleFilter ] = useState("");
+    const [ authorFilter, setAuthorFilter ] = useState("");
+    const [ publisherFilter, setPublisherFilter ] = useState("");
+
+    const filteredBooks = useMemo(() => books.filter(value => (
+        (!!titleFilter ? contains(value.title, titleFilter) : true) &&
+        (!!authorFilter ? contains(value.author.name, authorFilter) : true) &&
+        (!!publisherFilter ? contains(value.publisher.name, publisherFilter) : true)
+    )), [ authorFilter, books, publisherFilter, titleFilter ]);
 
     const attemptDelete = useCallback((id: number) => {
         deleteBook(id)
@@ -89,52 +87,74 @@ function BooksDataTable() {
     }, []);
 
     return (
-        <DataTable dataList={ books } excludedProperties={ [ "id" ] }>
-            <DataTableDataColumn list={ books } forKey="author"
-                                 header="Író"
-                                 element={ value => (
-                                     <Typography variant="small">
-                                         { value.name }
-                                     </Typography>
-                                 ) } />
-            <DataTableDataColumn list={ books } forKey="title"
-                                 header="Cím"
-                                 element={ value => (
-                                     <Typography variant="small" className="font-bold">
-                                         { value }
-                                     </Typography>
-                                 ) } />
-            <DataTableDataColumn list={ books } forKey="category"
-                                 header="Kategória"
-                                 element={ value => (
-                                     <Typography variant="small">
-                                         { value.name }
-                                     </Typography>
-                                 ) } />
-            <DataTableDataColumn list={ books } forKey="publicationYear"
-                                 header="Kiadás éve"
-                                 element={ value => (
-                                     <Chip value={ value } variant="ghost"
-                                           className="w-min" color="deep-purple" />
-                                 ) } />
-            <DataTableDataColumn list={ books } forKey="publisher"
-                                 header="Kiadó"
-                                 element={ value => (
-                                     <Typography variant="small">
-                                         { value.name }
-                                     </Typography>
-                                 ) } />
-            <DataTableActionColumn list={ books } element={ ({ id }) => (
-                <div className="flex flex-row gap-2">
-                    <IconButton variant="text" onClick={ () => openModal(id) }>
-                        <MaterialSymbol name="edit" />
-                    </IconButton>
-                    <DestructiveIconButton onClick={ () => attemptDelete(id) }>
-                        <MaterialSymbol name="delete" />
-                    </DestructiveIconButton>
-                </div>
-            ) } />
-        </DataTable>
+        <div className="flex flex-col items-stretch gap-2">
+            <div className="w-full grid grid-cols-3 gap-2">
+                <Input crossOrigin="" value={ titleFilter }
+                       onChange={ event => setTitleFilter(event.target.value) }
+                       label="Cím" />
+                <Input crossOrigin="" value={ authorFilter }
+                       onChange={ event => setAuthorFilter(event.target.value) }
+                       label="Író" />
+                <Input crossOrigin="" value={ publisherFilter }
+                       onChange={ event => setPublisherFilter(event.target.value) }
+                       label="Kiadó" />
+            </div>
+            <DataTable dataList={ filteredBooks } excludedProperties={ [ "id" ] }>
+                <DataTableDataColumn list={ filteredBooks } forKey="author"
+                                     header="Író">
+                    { value => (
+                        <Typography variant="small">
+                            { value.name }
+                        </Typography>
+                    ) }
+                </DataTableDataColumn>
+                <DataTableDataColumn list={ filteredBooks } forKey="title"
+                                     header="Cím">
+                    { value => (
+                        <Typography variant="small" className="font-bold">
+                            { value }
+                        </Typography>
+                    ) }
+                </DataTableDataColumn>
+                <DataTableDataColumn list={ filteredBooks } forKey="category"
+                                     header="Kategória">
+                    { value => (
+                        <Typography variant="small">
+                            { value.name }
+                        </Typography>
+                    ) }
+                </DataTableDataColumn>
+                <DataTableDataColumn list={ filteredBooks } forKey="publicationYear"
+                                     header="Kiadás éve">
+                    { value => (
+                        <Chip value={ value } variant="ghost"
+                              className="w-min" color="deep-purple" />
+                    ) }
+                </DataTableDataColumn>
+                <DataTableDataColumn list={ filteredBooks } forKey="publisher"
+                                     header="Kiadó">
+                    { value => (
+                        <Typography variant="small">
+                            { value.name }
+                        </Typography>
+                    ) }
+                </DataTableDataColumn>
+                <DataTableActionColumn list={ filteredBooks }>
+                    { ({ id }) => (
+                        <div className="flex flex-row gap-2">
+                            <Link to={ String(id) }>
+                                <IconButton variant="text">
+                                    <MaterialSymbol name="edit" />
+                                </IconButton>
+                            </Link>
+                            <DestructiveIconButton onClick={ () => attemptDelete(id) }>
+                                <MaterialSymbol name="delete" />
+                            </DestructiveIconButton>
+                        </div>
+                    ) }
+                </DataTableActionColumn>
+            </DataTable>
+        </div>
     );
 }
 
@@ -198,87 +218,6 @@ function NewBookModal() {
                 </Button>
                 <Button variant="filled" disabled={ loading || !canCreate } onClick={ create }>
                     Hozzáadás
-                </Button>
-            </DialogFooter>
-        </Dialog>
-    );
-}
-
-function EditBookModal() {
-    const [ searchParams, setSearchParams ] = useSearchParams();
-    const [ book, loadingBook ] = useBookDetails(
-        searchParams.has(PARAM_KEY_ID) ? parseInt(searchParams.get(PARAM_KEY_ID)!) : -1
-    );
-
-    const [ bookData, setBookData ] = useState<BookEditData>(defaultBookEditData);
-    const [ loading, setLoading ] = useState(false);
-
-    const open = useMemo(() => {
-        return searchParams.get(PARAM_KEY_MODAL) === PARAM_VALUE_MODAL_EDIT_BOOK;
-    }, [ searchParams ]);
-    const setOpen = useCallback((isOpen: boolean) => {
-        setSearchParams(prevState => {
-            if (isOpen) {
-                prevState.set(PARAM_KEY_MODAL, PARAM_VALUE_MODAL_EDIT_BOOK);
-            } else {
-                prevState.delete(PARAM_KEY_MODAL);
-                prevState.delete(PARAM_KEY_ID);
-            }
-
-            return prevState;
-        });
-
-        setBookData(defaultBookEditData);
-    }, [ setSearchParams ]);
-
-    const canCreate = useMemo(() => {
-        return [ bookData.title, bookData.categoryId, bookData.authorId, bookData.publisherId ]
-            .every(value => !!value);
-    }, [ bookData.authorId, bookData.categoryId, bookData.publisherId, bookData.title ]);
-
-    const edit = useCallback(() => {
-        if (!book || !canCreate) return;
-
-        setLoading(true);
-        editBook(book.id, bookData as Unidentifiable<Book>)
-            .then(() => {
-                displayInfoNotification("Könyv hozzáadva.");
-                setOpen(false);
-                window.location.reload();
-            })
-            .catch(displayErrorNotification)
-            .finally(() => setLoading(false));
-    }, [ book, bookData, canCreate, setOpen ]);
-
-    useEffect(() => {
-        if (!!book) setBookData(book);
-    }, [ book ]);
-
-    useEffect(() => {
-        if (open && !searchParams.has(PARAM_KEY_ID)) setOpen(false);
-    }, [ open, searchParams, setOpen ]);
-
-    return (
-        <Dialog open={ open } handler={ setOpen }>
-            <DialogHeader>
-                <Typography variant="lead">
-                    Könyv szerkesztése
-                </Typography>
-            </DialogHeader>
-            <hr />
-            <DialogBody>
-                { loadingBook ? <Spinner /> : (
-                    <BookEditLayout data={ bookData } onData={ setBookData } />
-                ) }
-            </DialogBody>
-            <hr />
-            <DialogFooter className="flex flex-row items-center justify-end gap-2">
-                <Button variant="text" onClick={ () => setOpen(false) }>
-                    Mégsem
-                </Button>
-                <Button variant="filled" disabled={ loading || loadingBook || !book }
-                        onClick={ edit }>
-                    Szerkesztés
                 </Button>
             </DialogFooter>
         </Dialog>

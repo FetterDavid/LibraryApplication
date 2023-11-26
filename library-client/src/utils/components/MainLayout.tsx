@@ -12,8 +12,8 @@ import { MaterialSymbol } from "@/utils/components/index";
 import { useMemo } from "react";
 import { logout } from "@/auth/api";
 import { Link, useLocation } from "react-router-dom";
-import { LibraryRouteProvider } from "@/library/components/LibraryRouteProvider";
 import { DestructiveIconButton } from "@/utils/components/inputs";
+import { LibraryRouteProvider } from "@/library/components";
 
 export default function MainLayout() {
     return (
@@ -34,7 +34,7 @@ function MainNavbar() {
         lg:px-8 lg:py-4 flex flex-row justify-between items-center
         col-start-1 col-span-full row-start-1 row-span-1">
             <Typography color="black" className="font-serif select-none" variant="h5">
-                Library Application
+                LibDrone
             </Typography>
             <Tooltip content="Kijelentkezés" placement="left">
                 <DestructiveIconButton onClick={ logout }>

@@ -3,6 +3,7 @@ import { Book, BookWithFullInfo } from "@/books/types";
 import { apiRequest } from "@/utils/api";
 import { displayErrorNotification } from "@/notifications";
 import { CategorisationObject } from "@/categorisation/types";
+import { getBook } from "@/books/api";
 
 export function useBookList(): [ BookWithFullInfo[], boolean ] {
     const [ list, setList ] = useState<BookWithFullInfo[]>([]);
@@ -41,24 +42,12 @@ export function useBookDetails(id: number): [ BookWithFullInfo | undefined, bool
     useEffect(() => {
         if (id < 0) {
             setLoading(false);
+            setData(undefined);
             return;
         }
 
-        apiRequest<Book>(`/Book/${ id }`, "GET")
-            .then(async book => {
-                const categorisationData = await Promise.all([ `/Category/${ book.categoryId }`,
-                    `/Author/${ book.authorId }`,
-                    `/Publisher/${ book.publisherId }` ].map(endpoint => {
-                    return apiRequest<CategorisationObject>(endpoint, "GET");
-                }));
-                setData({
-                    ...book,
-                    id: (book as any)["inventoryNumber"],
-                    category: categorisationData[0],
-                    author: categorisationData[1],
-                    publisher: categorisationData[2]
-                });
-            })
+        getBook(id)
+            .then(setData)
             .catch(displayErrorNotification)
             .finally(() => setLoading(false));
     }, [ id ]);

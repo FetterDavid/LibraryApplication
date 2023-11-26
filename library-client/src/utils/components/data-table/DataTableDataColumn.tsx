@@ -4,21 +4,21 @@ import { DataTableContext } from "@/utils/components/data-table/index";
 import { Identifiable } from "@/utils/types";
 
 export interface DataTableDataColumnProps<
-    T extends Identifiable,
-    K extends keyof T = keyof T
+    DataType extends Identifiable,
+    DataTypeKey extends keyof DataType = keyof DataType
 > {
-    list: T[];
-    forKey: K;
+    list: DataType[];
+    forKey: DataTypeKey;
     header?: string;
 
-    element(value: T[K]): ReactNode;
+    children(value: DataType[DataTypeKey]): ReactNode;
 }
 
 export default function DataTableDataColumn<
-    T extends Identifiable,
-    K extends keyof T = keyof T
->(props: DataTableDataColumnProps<T, K>) {
-    const { setDataColumn } = useContext<DataTableContextType<T>>(DataTableContext);
+    DataType extends Identifiable,
+    DataTypeKey extends keyof DataType = keyof DataType
+>(props: DataTableDataColumnProps<DataType, DataTypeKey>) {
+    const { setDataColumn } = useContext<DataTableContextType<DataType>>(DataTableContext);
 
     useEffect(() => {
         setDataColumn(props);

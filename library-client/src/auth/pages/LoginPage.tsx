@@ -1,5 +1,5 @@
 import { Button, Card, CardBody, CardFooter, Input, Spinner } from "@material-tailwind/react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { login } from "@/auth/api";
 import { displayErrorNotification } from "@/notifications";
 import { useAuthUser } from "@/auth/hooks";
@@ -26,6 +26,8 @@ function LoginPageContent() {
     const [ password, setPassword ] = useState("");
     const [ loading, setLoading ] = useState(false);
 
+    const [ error, setError ] = useState(false);
+
     const canLogin = useMemo(() => {
         return !!username && !!password;
     }, [ password, username ]);
@@ -35,9 +37,17 @@ function LoginPageContent() {
 
         setLoading(true);
         login(username, password)
-            .catch(displayErrorNotification)
+            .catch(reason => {
+                console.error(reason);
+                displayErrorNotification("Hibás felhasználónév vagy jelszó!");
+                setError(true);
+            })
             .finally(() => setLoading(false));
     }, [ canLogin, username, password ]);
+
+    useEffect(() => {
+        setError(false);
+    }, [ username, password ]);
 
     return (
         <div className="w-screen h-screen grid place-content-center">
@@ -45,10 +55,10 @@ function LoginPageContent() {
                 <CardBody className="flex flex-col items-stretch gap-2">
                     <Input crossOrigin="" value={ username } onChange={ event => {
                         setUsername(event.currentTarget.value);
-                    } } label="Felhasználónév" type="text" />
+                    } } label="Felhasználónév" type="text" error={ error } />
                     <Input crossOrigin="" value={ password } onChange={ event => {
                         setPassword(event.currentTarget.value);
-                    } } label="Jelszó" type="password" />
+                    } } label="Jelszó" type="password" error={ error } />
                 </CardBody>
                 <CardFooter>
                     <Button disabled={ !canLogin || loading } onClick={ attemptLogin }

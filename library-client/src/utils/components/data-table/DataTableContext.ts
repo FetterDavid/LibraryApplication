@@ -4,11 +4,11 @@ import { DataTableActionColumnProps } from "./DataTableActionColumn";
 import { Identifiable } from "@/utils/types";
 
 export type DataTableContextType<
-    T extends Identifiable,
+    DataType extends Identifiable,
 > = {
-    list: T[]
-    setDataColumn(options: DataTableDataColumnProps<T>): void
-    setActionColumn(options: DataTableActionColumnProps<T>): void
+    list: DataType[]
+    setDataColumn(options: DataTableDataColumnProps<DataType>): void
+    setActionColumn(options: DataTableActionColumnProps<DataType>): void
 }
 
 const DataTableContext = createContext<DataTableContextType<any>>({

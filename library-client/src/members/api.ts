@@ -18,3 +18,9 @@ export async function editMember(id: number, data: MemberEditData) {
 export async function deleteMember(id: number) {
     return apiRequest(`/Member/${ id }`, "DELETE");
 }
+
+export async function getMember(id: number) {
+    const data = await apiRequest<Member>(`/Member/${ id }`, "GET");
+    data.id = (data as any)["readerNumber"];
+    return data;
+}

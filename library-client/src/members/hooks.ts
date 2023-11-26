@@ -28,6 +28,7 @@ export function useMemberDetails(id: number): [ Member | undefined, boolean ] {
     useEffect(() => {
         if (id < 0) {
             setLoading(false);
+            setData(undefined);
             return;
         }
 

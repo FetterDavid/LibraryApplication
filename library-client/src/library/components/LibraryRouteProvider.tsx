@@ -5,23 +5,28 @@ import { LibraryContext } from "@/library";
 import { useMemo } from "react";
 import { useCategorisationObjectList } from "@/categorisation/hooks";
 import { useMemberList } from "@/members/hooks";
+import { useAcquisitionList } from "@/acquisitions/hooks";
+import { useBorrowList } from "@/borrowing/hooks";
 
-export function LibraryRouteProvider() {
+export default function LibraryRouteProvider() {
     const [ books, loadingBooks ] = useBookList();
     const [ categories, loadingCategories ] = useCategorisationObjectList("categories");
     const [ authors, loadingAuthors ] = useCategorisationObjectList("authors");
     const [ publishers, loadingPublishers ] = useCategorisationObjectList("publishers");
     const [ members, loadingMembers ] = useMemberList();
+    const [ acquisitions, loadingAcquisitions ] = useAcquisitionList();
+    const [ borrowings, loadingBorrowings ] = useBorrowList();
 
     const loading = useMemo(() => {
         return loadingBooks || loadingCategories || loadingAuthors || loadingPublishers ||
-            loadingMembers;
-    }, [ loadingAuthors, loadingBooks, loadingCategories, loadingMembers, loadingPublishers ]);
+            loadingMembers || loadingAcquisitions || loadingBorrowings;
+    }, [ loadingAcquisitions, loadingAuthors, loadingBooks,
+        loadingBorrowings, loadingCategories, loadingMembers, loadingPublishers ]);
 
     const error = useMemo(() => {
-        return ![ books, categories, authors, publishers, members ]
+        return ![ books, categories, authors, publishers, members, acquisitions ]
             .every(value => value !== undefined);
-    }, [ authors, books, categories, members, publishers ]);
+    }, [ acquisitions, authors, books, categories, members, publishers ]);
 
     return (
         <LoadingView condition={ loading }>
@@ -30,7 +35,7 @@ export function LibraryRouteProvider() {
             </LoadingViewError>
             <LoadingViewContent>
                 <LibraryContext.Provider value={
-                    { books, categories, authors, publishers, members }
+                    { books, categories, authors, publishers, members, acquisitions, borrowings }
                 }>
                     <Outlet />
                 </LibraryContext.Provider>
