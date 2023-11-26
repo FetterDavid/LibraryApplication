@@ -12,8 +12,8 @@ import { MaterialSymbol } from "@/utils/components/index";
 import { useMemo } from "react";
 import { logout } from "@/auth/api";
 import { Link, useLocation } from "react-router-dom";
-import { LibraryRouteProvider } from "@/library/components/LibraryRouteProvider";
 import { DestructiveIconButton } from "@/utils/components/inputs";
+import { LibraryRouteProvider } from "@/library/components";
 
 export default function MainLayout() {
     return (

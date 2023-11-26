@@ -5,4 +5,4 @@ export interface CategorisationObject extends Identifiable {
     name: string;
 }
 
-export type CategorisationType = keyof Omit<Library, "books">
+export type CategorisationType = keyof Omit<Library, "books" | "acquisitions" | "members">
