@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import {
     Button,
@@ -113,9 +113,11 @@ function MembersDataTable() {
             <DataTableActionColumn list={ members }>
                 { ({ id }) => (
                     <div className="flex flex-row gap-2">
-                        <IconButton variant="text" onClick={ () => openModal(id) }>
-                            <MaterialSymbol name="edit" />
-                        </IconButton>
+                        <Link to={ String(id) }>
+                            <IconButton variant="text">
+                                <MaterialSymbol name="person" />
+                            </IconButton>
+                        </Link>
                         <DestructiveIconButton onClick={ () => attemptDelete(id) }>
                             <MaterialSymbol name="delete" />
                         </DestructiveIconButton>

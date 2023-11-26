@@ -22,7 +22,6 @@ import {
     DataTableDataColumn
 } from "@/utils/components/data-table";
 import { MaterialSymbol } from "@/utils/components";
-import { DestructiveIconButton } from "@/utils/components/inputs";
 import { createBorrowing, deleteBorrowing, editBorrowing } from "@/borrowing/api";
 import { useBorrowingDetails } from "@/borrowing/hooks";
 import { BorrowingEditData } from "@/borrowing/types";
@@ -118,9 +117,6 @@ function BorrowingsDataTable() {
                         <IconButton variant="text" onClick={ () => openModal(id) }>
                             <MaterialSymbol name="edit" />
                         </IconButton>
-                        <DestructiveIconButton onClick={ () => attemptDelete(id) }>
-                            <MaterialSymbol name="delete" />
-                        </DestructiveIconButton>
                     </div>
                 ) }
             </DataTableActionColumn>
