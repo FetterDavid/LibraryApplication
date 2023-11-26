@@ -9,7 +9,7 @@ namespace LibraryApplication.Api.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class RatingController : LibraryControllerBase<Librarian>
+    public class RatingController : LibraryControllerBase<Rating>
     {
         public RatingController(LibraryContext libraryContext) : base(libraryContext) { }
     }
