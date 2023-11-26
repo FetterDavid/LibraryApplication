@@ -96,7 +96,7 @@ Books }o--|| Authors
 Books }o--|| Categories
 Loans ||--|| Books
 Loans }o--|| Readers
-LateFees }o--o{ Loans
+LateFees ||--|| Loans
 LibraryAcquisitions ||--|| Books
 LibraryReviews }o--|| Books
 LibraryReviews }o--|| Readers

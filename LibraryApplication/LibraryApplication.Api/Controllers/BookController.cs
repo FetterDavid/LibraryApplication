@@ -51,8 +51,32 @@ namespace LibraryApplication.Api.Controllers
                 default:
                     break;
             }
-
             return Ok(books);
+        }
+
+        [HttpDelete("deep/{bookId}")]
+        public async Task<IActionResult> DeepDeleteAuthorById(int bookId)
+        {
+            Book book = await _libraryContext.Books.FindAsync(bookId);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            // kölcsönzések
+            List<Borrowing> borrowings = await _libraryContext.Borrowings.ToListAsync();
+            borrowings = borrowings?.Where(x => x.InventoryNumber == bookId).ToList();
+            _libraryContext.Borrowings.RemoveRange(borrowings);
+            // könyv beszerzések
+            List<BookAcquisition> bookAcquisitions = await _libraryContext.BookAcquisitions.ToListAsync();
+            bookAcquisitions = bookAcquisitions?.Where(x => x.InventoryNumber == bookId).ToList();
+            _libraryContext.BookAcquisitions.RemoveRange(bookAcquisitions);
+            // értékelések
+            List<Rating> ratings = await _libraryContext.Ratings.ToListAsync();
+            ratings = ratings?.Where(x => x.InventoryNumber == bookId).ToList();
+            _libraryContext.Ratings.RemoveRange(ratings);
+            _libraryContext.Books.Remove(book);
+            await _libraryContext.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
