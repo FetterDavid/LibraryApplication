@@ -19,6 +19,7 @@ export default function MemberSelect(props: SelectComponentProps<number | undefi
     return (
         <GenericSelect options={ options }
                        label="Olvasó"
+                       disabled={ props.disabled }
                        selected={ String(props.selected) }
                        onSelect={ value => props.onSelect(parseInt(value)) } />
     );

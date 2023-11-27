@@ -24,6 +24,7 @@ export default function BookSelect(props: SelectComponentProps<number | undefine
     return (
         <GenericSelect options={ options }
                        label="Könyv"
+                       disabled={ props.disabled }
                        selected={ String(props.selected) }
                        onSelect={ value => props.onSelect(parseInt(value)) } />
     );

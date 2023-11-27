@@ -17,11 +17,12 @@ import { LibraryRouteProvider } from "@/library/components";
 
 export default function MainLayout() {
     return (
-        <div className="w-screen h-screen p-4 grid gap-4
+        <div className="w-screen h-screen p-4 pb-0 grid gap-4
         grid-cols-[minmax(20rem,_20vw)_auto] grid-rows-[min-content_auto]">
             <MainNavbar />
             <MainSidebar />
-            <div className="col-start-2 col-span-1 row-start-2 row-span-1 w-full">
+            <div className="col-start-2 col-span-1 row-start-2 row-span-1 w-full
+            overflow-y-scroll pb-4">
                 <LibraryRouteProvider />
             </div>
         </div>
@@ -75,7 +76,7 @@ function MainSidebar() {
     }, []);
 
     return (
-        <Card className="shadow-lg bg-white bg-opacity-80 border border-white/80 w-full">
+        <Card className="shadow-lg bg-white bg-opacity-80 border border-white/80 w-full mb-4">
             <CardBody className="px-0 flex flex-col items-stretch justify-start gap-2">
                 <Typography className="px-8 mb-4 select-none" color="deep-purple" variant="h5">
                     Navigáció

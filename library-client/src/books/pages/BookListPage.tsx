@@ -155,7 +155,7 @@ function BooksDataTable() {
                         <div className="flex flex-row gap-2">
                             <Link to={ String(id) }>
                                 <IconButton variant="text">
-                                    <MaterialSymbol name="edit" />
+                                    <MaterialSymbol name="arrow_forward" />
                                 </IconButton>
                             </Link>
                             <DestructiveIconButton onClick={ () => attemptDelete(id) }>

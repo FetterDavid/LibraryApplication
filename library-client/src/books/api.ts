@@ -1,5 +1,5 @@
 import { Unidentifiable } from "@/utils/types";
-import { Book, BookWithFullInfo } from "@/books/types";
+import { Book, BookWithFullInfo, RatingEditData } from "@/books/types";
 import { apiRequest } from "@/utils/api";
 import { CategorisationObject } from "@/categorisation/types";
 
@@ -65,4 +65,16 @@ export async function searchBooks(
     }
 
     return out;
+}
+
+export async function createRating(data: RatingEditData) {
+    return apiRequest("/Rating", "POST", data);
+}
+
+export async function editRating(id: number, data: RatingEditData) {
+    return apiRequest(`/Rating/${ id }`, "PUT", data);
+}
+
+export async function deleteRating(id: number) {
+    return apiRequest(`/Rating/${ id }`, "DELETE");
 }

@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { LoadingView, LoadingViewContent, LoadingViewError } from "@/utils/components/loading";
 import {
     Button,
@@ -6,16 +6,22 @@ import {
     CardBody,
     CardFooter,
     CardHeader,
+    Dialog,
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
     IconButton,
+    Rating,
+    Spinner,
     Typography
 } from "@material-tailwind/react";
-import { Book, BookEditData } from "@/books/types";
+import { Book, BookEditData, RatingEditData } from "@/books/types";
 import { Fragment, useCallback, useMemo, useState } from "react";
-import { deleteBook, editBook } from "@/books/api";
+import { createRating, deleteBook, deleteRating, editBook } from "@/books/api";
 import { Unidentifiable } from "@/utils/types";
 import { displayErrorNotification, displayInfoNotification } from "@/notifications";
-import { BookEditLayout } from "@/books/components";
-import { useBookDetails } from "@/books/hooks";
+import { BookEditLayout, RatingEditLayout } from "@/books/components";
+import { useBookDetails, useBookRatings } from "@/books/hooks";
 import { useLibraryFromContext } from "@/library/hooks";
 import {
     DataTable,
@@ -23,6 +29,10 @@ import {
     DataTableDataColumn
 } from "@/utils/components/data-table";
 import { MaterialSymbol } from "@/utils/components";
+import { DestructiveIconButton } from "@/utils/components/inputs";
+
+const PARAM_KEY_MODAL = "modal";
+const PARAM_VALUE_MODAL_NEW_RATING = "newRating";
 
 export default function BookDetailsPage() {
     const { id: bookId } = useParams();
@@ -46,6 +56,8 @@ export default function BookDetailsPage() {
                         <BookDetailsEditor { ...book! } />
                     </Card>
                     <BorrowHistory { ...book! } />
+                    <Ratings { ...book! } />
+                    <NewRatingModal { ...book! } />
                 </div>
             </LoadingViewContent>
         </LoadingView>
@@ -148,4 +160,147 @@ function BorrowHistory(props: Book) {
             </CardBody>
         </Card>
     );
+}
+
+function Ratings(props: Book) {
+    const [ ratings, loadingRatings ] = useBookRatings(props.id);
+    const [ , setSearchParams ] = useSearchParams();
+
+    const openNewRatingModal = useCallback(() => {
+        setSearchParams(state => {
+            state.set(PARAM_KEY_MODAL, PARAM_VALUE_MODAL_NEW_RATING);
+            return state;
+        });
+    }, [ setSearchParams ]);
+
+    const attemptDelete = useCallback((id: number) => {
+        deleteRating(id)
+            .then(() => window.location.reload())
+            .catch(displayErrorNotification);
+    }, []);
+
+    return loadingRatings ? <Spinner /> : (
+        <Card>
+            <CardHeader floated={ false } shadow={ false } className="m-6">
+                <Typography className="text-center select-none" variant="h6">
+                    Értékelések
+                </Typography>
+            </CardHeader>
+            <hr />
+            <CardBody>
+                <DataTable dataList={ ratings } excludedProperties={ [ "id" ] }>
+                    <DataTableDataColumn list={ ratings } forKey="reader"
+                                         header="Olvasó">
+                        { value => (
+                            <Link to={ `/members/${ value.id }` }>
+                                <Typography variant="small" className="hover:underline">
+                                    { value.name }
+                                </Typography>
+                            </Link>
+                        ) }
+                    </DataTableDataColumn>
+                    <DataTableDataColumn list={ ratings } forKey="point"
+                                         header="Értékelés">
+                        { value => (
+                            <Rating value={ value } readonly />
+                        ) }
+                    </DataTableDataColumn>
+                    <DataTableActionColumn list={ ratings }>
+                        { ({ id }) => (
+                            <div className="flex flex-row gap-2 items-center">
+                                <DestructiveIconButton onClick={ () => attemptDelete(id) }>
+                                    <MaterialSymbol name="delete" />
+                                </DestructiveIconButton>
+                            </div>
+                        ) }
+                    </DataTableActionColumn>
+                </DataTable>
+            </CardBody>
+            <hr />
+            <CardFooter>
+                <Button onClick={ openNewRatingModal }>
+                    Új értékelés
+                </Button>
+            </CardFooter>
+        </Card>
+    );
+}
+
+function NewRatingModal(props: Book) {
+    const [ searchParams, setSearchParams ] = useSearchParams();
+
+    const [ ratingEditData, setRatingEditData ] = useState<RatingEditData>({
+        ...defaultRatingEditData(), inventoryNumber: props.id
+    });
+    const [ loading, setLoading ] = useState(false);
+
+    const open = useMemo(() => {
+        return searchParams.get(PARAM_KEY_MODAL) === PARAM_VALUE_MODAL_NEW_RATING;
+    }, [ searchParams ]);
+    const setOpen = useCallback((isOpen: boolean) => {
+        setSearchParams(prevState => {
+            if (isOpen) {
+                prevState.set(PARAM_KEY_MODAL, PARAM_VALUE_MODAL_NEW_RATING);
+            } else {
+                prevState.delete(PARAM_KEY_MODAL);
+            }
+
+            return prevState;
+        });
+
+        setRatingEditData(defaultRatingEditData);
+    }, [ setSearchParams ]);
+
+    const canCreate = useMemo(() => {
+        return [ ratingEditData.inventoryNumber, ratingEditData.readerNumber ]
+            .every(value => !!value);
+    }, [ ratingEditData.inventoryNumber, ratingEditData.readerNumber ]);
+
+    const create = useCallback(() => {
+        if (!canCreate) return;
+
+        setLoading(true);
+        createRating(ratingEditData)
+            .then(() => {
+                displayInfoNotification("Könyv hozzáadva.");
+                setOpen(false);
+                window.location.reload();
+            })
+            .catch(displayErrorNotification)
+            .finally(() => setLoading(false));
+    }, [ ratingEditData, canCreate, setOpen ]);
+
+    return (
+        <Dialog open={ open } handler={ setOpen }>
+            <DialogHeader>
+                <Typography variant="lead">
+                    Új értékelés
+                </Typography>
+            </DialogHeader>
+            <hr />
+            <DialogBody>
+                <RatingEditLayout data={ ratingEditData } onData={ setRatingEditData }
+                                  disabled="book" />
+            </DialogBody>
+            <hr />
+            <DialogFooter className="flex flex-row items-center justify-end gap-2">
+                <Button variant="text" onClick={ () => setOpen(false) }>
+                    Mégsem
+                </Button>
+                <Button variant="filled" disabled={ loading || !canCreate } onClick={ create }>
+                    Rögzítés
+                </Button>
+            </DialogFooter>
+        </Dialog>
+    );
+}
+
+function defaultRatingEditData(): RatingEditData {
+    return {
+        inventoryNumber: undefined,
+        point: 3,
+        ratingDate: new Date(),
+        readerNumber: undefined,
+        comment: ""
+    };
 }
