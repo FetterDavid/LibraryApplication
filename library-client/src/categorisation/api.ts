@@ -12,6 +12,6 @@ export async function editCategorisationObject(type: CategorisationType, id: num
 }
 
 export async function deleteCategorisationObject(type: CategorisationType, id: number) {
-    const path = `${ categorisationTypeToEndpoint(type) }/${ id }`;
+    const path = `${ categorisationTypeToEndpoint(type) }/deep/${ id }`;
     return apiRequest(path, "DELETE");
 }

@@ -16,7 +16,7 @@ export async function editBook(id: number, data: Unidentifiable<Book>) {
 }
 
 export async function deleteBook(id: number) {
-    return apiRequest(`/Book/${ id }`, "DELETE");
+    return apiRequest(`/Book/deep/${ id }`, "DELETE");
 }
 
 export async function getBook(id: number) {
