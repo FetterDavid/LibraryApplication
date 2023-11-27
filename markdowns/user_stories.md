@@ -7,7 +7,7 @@
 **Given:** adatbázis\
 **When:** könyvet bediktáltam\
 **Then:** megjelenjen az adatbázisban\
-\
+
 ## **User story 2:**
 **As a:** könyvtáros\
 **I want:** könyvek keresése cím szerint\
@@ -16,7 +16,7 @@
 **Given:** adatbázis\
 **When:** könyvre rákerestem cím szerint\
 **Then:** megtalálom a keresett könyvet\
-\
+
 ## **User story 3:**
 **As a:** könyvtáros\
 **I want:** új olvasó bediktálása\
@@ -25,7 +25,7 @@
 **Given:** adatbázis\
 **When:** új olvasó adatai bediktálása\
 **Then:** megjelenjen az adatbázisban\
-\
+
 ## **User story 4:**
 **As a:** könyvtáros\
 **I want:** kikölcsönzött könyvek felírása\
@@ -34,7 +34,7 @@
 **Given:** adatbázis\
 **When:** könyvre rákeresek\
 **Then:** kiadja, hogy a könyv ki van kölcsönözve, vagy sem\
-\
+
 ## **User story 5:**
 **As a:** könyvtáros\
 **I want:** olvasói tartozások kiszámolása\
@@ -43,7 +43,7 @@
 **Given:** adatbázis\
 **When:** a könyvkölcsönzés ideje lejár\
 **Then:** kezdje növelni a tartozást\
-\
+
 ## **User story 6:**
 **As a:** könyvtáros\
 **I want:** általános könyvtár szerkesztést\
@@ -52,7 +52,7 @@
 **Given:** adatbázis + UI\
 **When:** gombot lenyomom\
 **Then:** felhozza az adatbázist\
-\ 
+
 ## **User story 7:**
 **As a:** könyvtáros\
 **I want:** címkés listázást\
@@ -70,7 +70,7 @@
 **Given:** adatbázis\
 **When:** leadnak egy könyvet\
 **Then:** automatikusan kérjen értékelést\
-\
+
 ## **User story 8:**
 **As a:** rendszergazda\
 **I want:** weboldal\
@@ -79,7 +79,7 @@
 **Given:** server\
 **When:** új gépet használunk\
 **Then:** elérhető a könyvtár alkalmazás\
-\
+
 ## **User story 9:**
 **As a:** olvasó\
 **I want:** értékelést leadni\
@@ -88,7 +88,7 @@
 **Given:** értékelés\
 **When:** könyvet leadtam\
 **Then:** leadhatok egy értékelést\
-\
+
 ## **User story 10:**
 **As a:** olvasó\
 **I want:** könyvajánlást kapni\
